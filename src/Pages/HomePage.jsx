@@ -73,14 +73,14 @@ const HomePage = () => {
     <div style={pageStyle}>
       <div style={{ width: '100%', margin: '0 auto', padding: '0' }}>
         <h1 style={titleStyle}>
-          Explore the Cosmos
+          Welcome to The Exomoon Archive!
         </h1>
 
         <div style={textContainerStyle}>
           <p style={paragraphStyle}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget nunc ultricies
-            tincidunt. Curabitur nec nisl eget justo cursus fermentum. Integer in justo euismod,
-            facilisis quam vel, feugiat enim.
+            The exomoon archive is a comprehensive dataset of exoplantes analyzed as potential hosts for exomoons.
+            This archive is designed to facilitate research and exploration in the field of exoplanetary science
+            providing a valuable resource for scientists and enthusiasts alike.
           </p>
         </div>
 

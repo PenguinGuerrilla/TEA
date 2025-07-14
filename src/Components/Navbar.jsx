@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router";
 
 const Navbar = () => {
   const [hoveredLink, setHoveredLink] = useState(null);
+  const navigate = useNavigate();
 
   const navStyle = {
     width: '100%',
@@ -23,6 +25,7 @@ const Navbar = () => {
     alignItems: 'center',
     textDecoration: 'none',
     color: '#ffffff',
+    cursor: 'pointer'
   };
 
   const logoImageStyle = {
@@ -47,6 +50,7 @@ const Navbar = () => {
     fontWeight: '500',
     position: 'relative',
     transition: 'color 0.3s ease',
+    cursor: 'pointer'
   });
 
   const linkUnderlineStyle = (isHovered) => ({
@@ -62,38 +66,38 @@ const Navbar = () => {
 
   return (
     <nav style={navStyle}>
-      <a href="/" style={logoContainerStyle}>
+      <div onClick={() => navigate('/')} style={logoContainerStyle}>
         <img src="/logo.png" alt="Logo" style={logoImageStyle} />
         <span style={logoTextStyle}>The Exomoon Archive</span>
-      </a>
+      </div>
       <div style={navLinksStyle}>
-        <a 
-          href="/" 
+        <div
+          onClick={() => navigate('/')}
           style={linkStyle(hoveredLink === 'home')}
           onMouseEnter={() => setHoveredLink('home')}
           onMouseLeave={() => setHoveredLink(null)}
         >
           Home
           <span style={linkUnderlineStyle(hoveredLink === 'home')}></span>
-        </a>
-        <a 
-          href="/cumulative" 
+        </div>
+        <div
+          onClick={() => navigate('/cumulative')}
           style={linkStyle(hoveredLink === 'dashboard')}
           onMouseEnter={() => setHoveredLink('dashboard')}
           onMouseLeave={() => setHoveredLink(null)}
         >
           Cumulative Kepler Data
           <span style={linkUnderlineStyle(hoveredLink === 'dashboard')}></span>
-        </a>
-        <a 
-          href="/ps" 
+        </div>
+        <div
+          onClick={() => navigate('/ps')}
           style={linkStyle(hoveredLink === 'about')}
           onMouseEnter={() => setHoveredLink('about')}
           onMouseLeave={() => setHoveredLink(null)}
         >
           Planetary Systems Data
           <span style={linkUnderlineStyle(hoveredLink === 'about')}></span>
-        </a>
+        </div>
       </div>
     </nav>
   );
