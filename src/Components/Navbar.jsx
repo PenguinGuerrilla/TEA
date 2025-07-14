@@ -1,9 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router";
 
 const Navbar = () => {
   const [hoveredLink, setHoveredLink] = useState(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      if (!mobile) {
+        setIsMenuOpen(false);
+      }
+      setIsMobile(mobile);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const handleLinkClick = (path) => {
+    navigate(path);
+    if (isMobile) {
+      setIsMenuOpen(false);
+    }
+  };
 
   const navStyle = {
     width: '100%',
@@ -25,7 +49,8 @@ const Navbar = () => {
     alignItems: 'center',
     textDecoration: 'none',
     color: '#ffffff',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    zIndex: 1001,
   };
 
   const logoImageStyle = {
@@ -38,19 +63,42 @@ const Navbar = () => {
     fontWeight: 'bold',
   };
 
-  const navLinksStyle = {
-    display: 'flex',
-    gap: '2rem',
+  const getNavLinksStyle = () => {
+    if (isMobile) {
+      return {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '2.5rem',
+        background: 'rgba(35, 2, 48, 0.95)',
+        backdropFilter: 'blur(10px)',
+        position: 'fixed',
+        top: 0,
+        right: 0,
+        height: '100vh',
+        width: '100%',
+        transition: 'transform 0.3s ease-in-out',
+        transform: isMenuOpen ? 'translateX(0)' : 'translateX(100%)',
+        paddingTop: '6rem',
+        zIndex: 999,
+      };
+    }
+    return {
+      display: 'flex',
+      gap: '2rem',
+    };
   };
 
   const linkStyle = (isHovered) => ({
-    color: isHovered ? '#ffffff' : '#d1c4e9',
+    color: isHovered || (isMobile && isMenuOpen) ? '#ffffff' : '#d1c4e9',
     textDecoration: 'none',
-    fontSize: '1rem',
+    fontSize: isMobile ? '1.2rem' : '1rem',
     fontWeight: '500',
     position: 'relative',
     transition: 'color 0.3s ease',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    padding: '0.5rem 0',
   });
 
   const linkUnderlineStyle = (isHovered) => ({
@@ -64,39 +112,69 @@ const Navbar = () => {
     transition: 'width 0.3s ease-in-out',
   });
 
+  const hamburgerStyle = {
+    display: isMobile ? 'flex' : 'none',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    width: '2rem',
+    height: '2rem',
+    background: 'transparent',
+    border: 'none',
+    cursor: 'pointer',
+    padding: 0,
+    zIndex: 1001,
+  };
+
+  const barStyle = {
+    width: '2rem',
+    height: '0.25rem',
+    background: '#ffffff',
+    borderRadius: '10px',
+    transition: 'all 0.3s linear',
+    position: 'relative',
+    transformOrigin: '1px',
+  };
+
   return (
     <nav style={navStyle}>
-      <div onClick={() => navigate('/')} style={logoContainerStyle}>
+      <div onClick={() => handleLinkClick('/')} style={logoContainerStyle}>
         <img src="/logo.png" alt="Logo" style={logoImageStyle} />
-        <span style={logoTextStyle}>The Exomoon Archive</span>
+        {!isMobile && <span style={logoTextStyle}>The Exomoon Archive</span>}
       </div>
-      <div style={navLinksStyle}>
+
+      <button style={hamburgerStyle} onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
+        <div style={{ ...barStyle, transform: isMenuOpen ? 'rotate(45deg)' : 'rotate(0)' }} />
+        <div style={{ ...barStyle, opacity: isMenuOpen ? 0 : 1, transform: isMenuOpen ? 'translateX(20px)' : 'translateX(0)' }} />
+        <div style={{ ...barStyle, transform: isMenuOpen ? 'rotate(-45deg)' : 'rotate(0)' }} />
+      </button>
+
+      <div style={getNavLinksStyle()}>
         <div
-          onClick={() => navigate('/')}
+          onClick={() => handleLinkClick('/')}
           style={linkStyle(hoveredLink === 'home')}
           onMouseEnter={() => setHoveredLink('home')}
           onMouseLeave={() => setHoveredLink(null)}
         >
           Home
-          <span style={linkUnderlineStyle(hoveredLink === 'home')}></span>
+          {!isMobile && <span style={linkUnderlineStyle(hoveredLink === 'home')}></span>}
         </div>
         <div
-          onClick={() => navigate('/cumulative')}
-          style={linkStyle(hoveredLink === 'dashboard')}
-          onMouseEnter={() => setHoveredLink('dashboard')}
+          onClick={() => handleLinkClick('/cumulative')}
+          style={linkStyle(hoveredLink === 'cumulative')}
+          onMouseEnter={() => setHoveredLink('cumulative')}
           onMouseLeave={() => setHoveredLink(null)}
         >
           Cumulative Kepler Data
-          <span style={linkUnderlineStyle(hoveredLink === 'dashboard')}></span>
+          {!isMobile && <span style={linkUnderlineStyle(hoveredLink === 'cumulative')}></span>}
         </div>
         <div
-          onClick={() => navigate('/ps')}
-          style={linkStyle(hoveredLink === 'about')}
-          onMouseEnter={() => setHoveredLink('about')}
+          onClick={() => handleLinkClick('/ps')}
+          style={linkStyle(hoveredLink === 'ps')}
+          onMouseEnter={() => setHoveredLink('ps')}
           onMouseLeave={() => setHoveredLink(null)}
         >
           Planetary Systems Data
-          <span style={linkUnderlineStyle(hoveredLink === 'about')}></span>
+          {!isMobile && <span style={linkUnderlineStyle(hoveredLink === 'ps')}></span>}
         </div>
       </div>
     </nav>
