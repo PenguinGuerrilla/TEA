@@ -47,145 +47,389 @@ const CumulativeTable = () => {
   const [columnFilters, setColumnFilters] = React.useState([]);
   const columns = [
     {
+      id: "select",
+      header: ({ table }) => (
+        <input
+          type="checkbox"
+          {...{
+            checked: table.getIsAllRowsSelected(),
+            indeterminate: table.getIsSomeRowsSelected(),
+            onChange: table.getToggleAllRowsSelectedHandler(),
+          }}
+        />
+      ),
+      cell: ({ row }) => (
+        <input
+          type="checkbox"
+          {...{
+            checked: row.getIsSelected(),
+            disabled: !row.getCanSelect(),
+            indeterminate: row.getIsSomeSelected(),
+            onChange: row.getToggleSelectedHandler(),
+          }}
+        />
+      ),
+    },
+    {
       accessorKey: "kepid",
-      header: "Kepler ID",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Kepler ID
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "kepoi_name",
-      header: "KOI Name",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            KOI Name
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "kepler_name",
-      header: "Kepler Name",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Kepler Name
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "koi_disposition",
-      header: "Exoplanet Archive Disposition",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Exoplanet Archive Disposition
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "koi_pdisposition",
-      header: "Disposition Using Kepler Data",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Disposition Using Kepler Data
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "koi_score",
-      header: "Disposition Score",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Disposition Score
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "koi_period",
-      header: "Orbital Period",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Orbital Period
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
 
     {
       accessorKey: "koi_teq",
-      header: "Equilibrium Temperature",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Equilibrium Temperature
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "koi_srad",
-      header: "Stellar Radius",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Stellar Radius
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
 
     {
       accessorKey: "koi_time0bk",
-      header: "Transit Epoch",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Transit Epoch
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
 
     {
       accessorKey: "koi_impact",
-      header: "Impact Parameter",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Impact Parameter
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
 
     {
       accessorKey: "koi_duration",
-      header: "Transit Duration",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Transit Duration
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
 
     {
       accessorKey: "koi_depth",
-      header: "Transit Depth",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Transit Depth
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
 
     {
       accessorKey: "koi_prad",
-      header: "Planetary Radius",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Planetary Radius
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
 
     {
       accessorKey: "koi_teq",
-      header: "Equilibrium Temperature",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Equilibrium Temperature
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
 
     {
       accessorKey: "koi_insol",
-      header: "Insolation Flux",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Insolation Flux
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
 
     {
       accessorKey: "koi_model_snr",
-      header: "Transit Signal-to-Noise",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Transit Signal-to-Noise
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
 
     {
       accessorKey: "koi_tce_plnt_num",
-      header: "TCE Planet Number",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            TCE Planet Number
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
 
     {
       accessorKey: "koi_tce_delivname",
-      header: "TCE Delivery",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            TCE Delivery
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
 
     {
       accessorKey: "koi_steff",
-      header: "Stellar Effective Temperature",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Stellar Effective Temperature
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
 
     {
       accessorKey: "koi_slogg",
-      header: "Stellar Surface Gravity",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Stellar Surface Gravity
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
 
     {
       accessorKey: "koi_srad",
-      header: "Stellar Radius",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Stellar Radius
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     },
 
-    {
-      accessorKey: "ra",
-      header: "RA",
-      cell: (props) => <span>{props.getValue()}</span>
-    },
-
-    {
-      accessorKey: "dec",
-      header: "Dec",
-      cell: (props) => <span>{props.getValue()}</span>
-    },
+    
 
     {
       accessorKey: "koi_kepmag",
-      header: "Kepler-band",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Kepler-band
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
       cell: (props) => <span>{props.getValue()}</span>
     }
 

@@ -47,208 +47,601 @@ const PsTable = () => {
   const [columnFilters, setColumnFilters] = React.useState([]);
   const columns = [
     {
+      id: "select",
+      header: ({ table }) => (
+        <input
+          type="checkbox"
+          {...{
+            checked: table.getIsAllRowsSelected(),
+            indeterminate: table.getIsSomeRowsSelected(),
+            onChange: table.getToggleAllRowsSelectedHandler(),
+          }}
+        />
+      ),
+      cell: ({ row }) => (
+        <input
+          type="checkbox"
+          {...{
+            checked: row.getIsSelected(),
+            disabled: !row.getCanSelect(),
+            indeterminate: row.getIsSomeSelected(),
+            onChange: row.getToggleSelectedHandler(),
+          }}
+        />
+      ),
+    },
+    {
       accessorKey: "pl_name",
-      header: "Planet Name",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Planet Name
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "hostname",
-      header: "Host Name",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Host Name
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "default_flag",
-      header: "Default Parameter Set",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Default Parameter Set
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "sy_snum",
-      header: "Number of Stars",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Number of Stars
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "sy_pnum",
-      header: "Number of Planets",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Number of Planets
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "discoverymethod",
-      header: "Discovery Method",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Discovery Method
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "disc_year",
-      header: "Discovery Year",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Discovery Year
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "disc_facility",
-      header: "Discovery Facility",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Discovery Facility
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "soltype",
-      header: "Solution Type",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Solution Type
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "pl_refname",
-      header: "Planetary Parameter Reference",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Planetary Parameter Reference
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "pl_orbper",
-      header: "Orbital Period",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Orbital Period
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "pl_orbsmax",
-      header: "Orbit Semi-Major Axis",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Orbit Semi-Major Axis
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "pl_rade",
-      header: "Planet Radius",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Planet Radius
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "pl_radj",
-      header: "Planet Radius",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Planet Radius
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "pl_bmasse",
-      header: "Planet Mass or Mass*sin(i)",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Planet Mass or Mass*sin(i)
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "pl_bmassj",
-      header: "Planet Mass or Mass*sin(i)",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Planet Mass or Mass*sin(i)
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "pl_bmassprov",
-      header: "Planet Mass or Mass*sin(i) Provenance",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Planet Mass or Mass*sin(i) Provenance
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "pl_orbeccen",
-      header: "Eccentricity",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Eccentricity
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "pl_insol",
-      header: "Insolation Flux",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Insolation Flux
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "pl_eqt",
-      header: "Equilibrium Temperature",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Equilibrium Temperature
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "ttv_flag",
-      header: "Data show Transit Timing Variations",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Data show Transit Timing Variations
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "st_refname",
-      header: "Stellar Parameter Reference",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Stellar Parameter Reference
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "st_spectype",
-      header: "Spectral Type",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Spectral Type
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "st_teff",
-      header: "Stellar Effective Temperature",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Stellar Effective Temperature
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "st_rad",
-      header: "Stellar Radius",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Stellar Radius
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "st_mass",
-      header: "Stellar Mass",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Stellar Mass
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "st_met",
-      header: "Stellar Metallicity",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Stellar Metallicity
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "st_metratio",
-      header: "Stellar Metallicity Ratio",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Stellar Metallicity Ratio
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "st_logg",
-      header: "Stellar Surface Gravity",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Stellar Surface Gravity
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "sy_refname",
-      header: "System Parameter Reference",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            System Parameter Reference
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "rastr",
-      header: "RA",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            RA
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "ra",
-      header: "RA",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            RA
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "decstr",
-      header: "Dec",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Dec
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "dec",
-      header: "Dec",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Dec
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "sy_dist",
-      header: "Distance",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Distance
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "sy_vmag",
-      header: "V (Johnson) Magnitude",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            V (Johnson) Magnitude
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "sy_kmag",
-      header: "Ks (2MASS) Magnitude",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Ks (2MASS) Magnitude
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "sy_gaiamag",
-      header: "Gaia Magnitude",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Gaia Magnitude
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "rowupdate",
-      header: "Date of Last Update",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Date of Last Update
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "pl_pubdate",
-      header: "Planetary Parameter Reference Publication Date",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Planetary Parameter Reference Publication Date
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
       accessorKey: "releasedate",
-      header: "Release Date",
+      header: ({column}) =>{
+        return(
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Release Date
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+            </div>
+            )},
       cell: (props) => <span>{props.getValue()}</span>
     }
   ];
