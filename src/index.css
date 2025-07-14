@@ -49,6 +49,9 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+body{
+  margin: 0;
+}
 a {
   font-weight: 500;
   color: #646cff;
@@ -78,7 +81,6 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
 }
