@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import Navbar from '../Components/Navbar';
+import Particles from '@/blocks/Backgrounds/Particles/Particles';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
   const [primaryHover, setPrimaryHover] = useState(false);
   const [secondaryHover, setSecondaryHover] = useState(false);
+  const navigate = useNavigate();
 
   const pageStyle = {
     minHeight: '100vh',
@@ -36,7 +39,7 @@ const HomePage = () => {
   const paragraphStyle = {
     fontSize: '1.1rem',
     lineHeight: '1.7',
-    color: '#a9a9b3',
+    color: '#ffffff',
   };
 
   const buttonContainerStyle = {
@@ -69,39 +72,56 @@ const HomePage = () => {
 
   return (
     <>
-    <Navbar />
-    <div style={pageStyle}>
-      <div style={{ width: '100%', margin: '0 auto', padding: '0' }}>
-        <h1 style={titleStyle}>
-          Welcome to The Exomoon Archive!
-        </h1>
-
-        <div style={textContainerStyle}>
-          <p style={paragraphStyle}>
-            The exomoon archive is a comprehensive dataset of exoplantes analyzed as potential hosts for exomoons.
-            This archive is designed to facilitate research and exploration in the field of exoplanetary science
-            providing a valuable resource for scientists and enthusiasts alike.
-          </p>
+      <Navbar />
+      <div style={{ position: 'relative', backgroundColor: '#0b0f19' }}>
+        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}>
+          <Particles
+            particleColors={['#ffffff']}
+            particleCount={400}
+            particleSpread={10}
+            speed={0.1}
+            particleBaseSize={100}
+            moveParticlesOnHover={true}
+            alphaParticles={false}
+            disableRotation={false}
+          />
         </div>
+        <div style={{...pageStyle, position: 'relative', zIndex: 2, backgroundColor: 'transparent' }}>
+          <div style={{ width: '80%', margin: '0 auto', padding: '0' }}>
+            <h1 style={titleStyle}>
+              Welcome to The Exomoon Archive!
+            </h1>
 
-        <div style={buttonContainerStyle}>
-          <button 
-            style={primaryButtonStyle}
-            onMouseEnter={() => setPrimaryHover(true)}
-            onMouseLeave={() => setPrimaryHover(false)}
-          >
-            Launch Mission
-          </button>
-          <button 
-            style={secondaryButtonStyle}
-            onMouseEnter={() => setSecondaryHover(true)}
-            onMouseLeave={() => setSecondaryHover(false)}
-          >
-            View Gallery
-          </button>
+            <div style={textContainerStyle}>
+              <p style={paragraphStyle}>
+                The exomoon archive is a comprehensive dataset of exoplantes analyzed as potential hosts for exomoons.
+                This archive is designed to facilitate research and exploration in the field of exoplanetary science
+                providing a valuable resource for scientists and enthusiasts alike.
+              </p>
+            </div>
+
+            <div style={buttonContainerStyle}>
+              <button
+                style={primaryButtonStyle}
+                onMouseEnter={() => setPrimaryHover(true)}
+                onMouseLeave={() => setPrimaryHover(false)}
+                onClick={() => navigate('/cumulative')}
+              >
+                Explore the Data
+              </button>
+              <button
+                style={secondaryButtonStyle}
+                onMouseEnter={() => setSecondaryHover(true)}
+                onMouseLeave={() => setSecondaryHover(false)}
+                onClick={() => navigate('/about')}
+              >
+                Learn More
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+
     </>
   );
 };

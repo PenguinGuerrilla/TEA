@@ -649,7 +649,7 @@ const PsTable = () => {
   const [globalFilter, setGlobalFilter] = React.useState('');
   const [pagination, setPagination] = React.useState({
     pageIndex: 0, //initial page index
-    pageSize: 10, //default page size
+    pageSize: 15, //default page size
   });
 
   const table = useReactTable({
@@ -674,29 +674,29 @@ const PsTable = () => {
   return (
     <>
       <Navbar />
-      <div className="rounded-sm border border-gray-200 bg-white px-5 pt-6 pb-2.5 shadow-md sm:px-7.5 xl:pb-1">
+      <div className="rounded-sm border border-gray-200 bg-white px-5 pt-6 pb-2.5 shadow-md sm:px-7.5 xl:pb-1 dark:bg-gray-900 dark:border-gray-700">
         <div className="mb-6">
-          <h4 className="text-xl font-semibold text-black mb-2">
+          <h4 className="text-xl font-semibold text-black mb-2 dark:text-white">
             Planetary Systems Data
           </h4>
           <input
             type="text"
             value={globalFilter ?? ''}
             onChange={e => setGlobalFilter(e.target.value)}
-            className="w-1/3 rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            placeholder="Pesquisar..."
+            className="w-1/3 rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:focus:ring-offset-gray-800"
+            placeholder="Search..."
           />
         </div>
 
         {/* Tabela Shadcn/ui */}
-        <div className="overflow-auto rounded-md border" style={{ height: '500px' }}>
+        <div className="overflow-auto rounded-md border dark:border-gray-700" style={{ height: '600px' }}>
           <Table>
-            <TableHeader className="bg-gray-50 sticky top-0 z-10">
+            <TableHeader className="bg-gray-50 sticky top-0 z-10 dark:bg-gray-800">
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
                     return (
-                      <TableHead key={header.id} className="whitespace-nowrap px-4 py-3 text-xs font-medium uppercase text-gray-600">
+                      <TableHead key={header.id} className="whitespace-nowrap px-4 py-3 text-xs font-medium uppercase text-gray-600 dark:text-gray-400">
                         {header.isPlaceholder
                           ? null
                           : flexRender(
@@ -715,9 +715,10 @@ const PsTable = () => {
                   <TableRow
                     key={row.id}
                     data-state={row.getIsSelected() && "selected"}
+                    className="dark:border-gray-700"
                   >
                     {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id} className="whitespace-nowrap px-4 py-2">
+                      <TableCell key={cell.id} className="whitespace-nowrap px-4 py-2 dark:text-gray-300">
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </TableCell>
                     ))}
@@ -725,8 +726,8 @@ const PsTable = () => {
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={columns.length} className="h-24 text-center">
-                    Nenhum resultado.
+                  <TableCell colSpan={columns.length} className="h-24 text-center dark:text-gray-300">
+                    No results.
                   </TableCell>
                 </TableRow>
               )}
@@ -736,31 +737,31 @@ const PsTable = () => {
 
         {/* Controles de Paginação Estilizados */}
         <div className="flex flex-col items-center justify-center gap-4 p-4 md:flex-row">
-          <div className="text-sm text-muted-foreground">
-            {table.getFilteredSelectedRowModel().rows.length} de{" "}
-            {table.getFilteredRowModel().rows.length} linha(s) selecionada(s).
+          <div className="text-sm text-muted-foreground dark:text-gray-400">
+            {table.getFilteredSelectedRowModel().rows.length} of{" "}
+            {table.getFilteredRowModel().rows.length} row(s) selected.
           </div>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6 lg:gap-8">
             <div className="flex items-center space-x-2">
               <button
                 onClick={() => table.previousPage()}
                 disabled={!table.getCanPreviousPage()}
-                className="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-100 border border-gray-300 rounded-md shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-100 border border-gray-300 rounded-md shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
               >
-                Anterior
+                Previous
               </button>
-              <span className="text-sm font-medium text-gray-700">
-                Página{' '}
-                <span className="font-bold text-indigo-600">
-                  {table.getState().pagination.pageIndex + 1} de {table.getPageCount()}
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                Page{' '}
+                <span className="font-bold text-indigo-600 dark:text-indigo-400">
+                  {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
                 </span>
               </span>
               <button
                 onClick={() => table.nextPage()}
                 disabled={!table.getCanNextPage()}
-                className="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-100 border border-gray-300 rounded-md shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-100 border border-gray-300 rounded-md shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
               >
-                Próxima
+                Next
               </button>
             </div>
             <select
@@ -768,15 +769,15 @@ const PsTable = () => {
               onChange={e => {
                 table.setPageSize(Number(e.target.value))
               }}
-              className="px-2 py-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="px-2 py-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
             >
-              {[10, 20, 30, 40, 50].map(pageSize => (
+              {[15, 20, 30, 40, 50].map(pageSize => (
                 <option key={pageSize} value={pageSize}>
-                  Mostrar {pageSize}
+                  Show {pageSize}
                 </option>
               ))}
               <option value={data.length}>
-                Mostrar Todos
+                Show All
               </option>
             </select>
           </div>

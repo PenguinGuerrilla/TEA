@@ -150,13 +150,13 @@ const Navbar = () => {
 
       <div style={getNavLinksStyle()}>
         <div
-          onClick={() => handleLinkClick('/')}
-          style={linkStyle(hoveredLink === 'home')}
-          onMouseEnter={() => setHoveredLink('home')}
+          onClick={() => handleLinkClick('/about')}
+          style={linkStyle(hoveredLink === 'about')}
+          onMouseEnter={() => setHoveredLink('about')}
           onMouseLeave={() => setHoveredLink(null)}
         >
-          Home
-          {!isMobile && <span style={linkUnderlineStyle(hoveredLink === 'home')}></span>}
+          About
+          {!isMobile && <span style={linkUnderlineStyle(hoveredLink === 'about')}></span>}
         </div>
         <div
           onClick={() => handleLinkClick('/cumulative')}
