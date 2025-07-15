@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 
 const Navbar = () => {
   const [hoveredLink, setHoveredLink] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -101,10 +102,10 @@ const Navbar = () => {
     padding: '0.5rem 0',
   });
 
-  const linkUnderlineStyle = (isHovered) => ({
+  const linkUnderlineStyle = (isHovered, isActive) => ({
     content: "''",
     position: 'absolute',
-    width: isHovered ? '100%' : '0',
+    width: isHovered || isActive ? '100%' : '0',
     height: '2px',
     bottom: '-5px',
     left: '0',
@@ -150,31 +151,40 @@ const Navbar = () => {
 
       <div style={getNavLinksStyle()}>
         <div
-          onClick={() => handleLinkClick('/about')}
-          style={linkStyle(hoveredLink === 'about')}
-          onMouseEnter={() => setHoveredLink('about')}
+          onClick={() => handleLinkClick('/')}
+          style={linkStyle(hoveredLink === 'home' || location.pathname === '/')}
+          onMouseEnter={() => setHoveredLink('home')}
           onMouseLeave={() => setHoveredLink(null)}
         >
-          About
-          {!isMobile && <span style={linkUnderlineStyle(hoveredLink === 'about')}></span>}
+          Home
+          {!isMobile && <span style={linkUnderlineStyle(hoveredLink === 'home', location.pathname === '/')}></span>}
         </div>
         <div
           onClick={() => handleLinkClick('/cumulative')}
-          style={linkStyle(hoveredLink === 'cumulative')}
+          style={linkStyle(hoveredLink === 'cumulative' || location.pathname === '/cumulative')}
           onMouseEnter={() => setHoveredLink('cumulative')}
           onMouseLeave={() => setHoveredLink(null)}
         >
           Cumulative Kepler Data
-          {!isMobile && <span style={linkUnderlineStyle(hoveredLink === 'cumulative')}></span>}
+          {!isMobile && <span style={linkUnderlineStyle(hoveredLink === 'cumulative', location.pathname === '/cumulative')}></span>}
         </div>
         <div
           onClick={() => handleLinkClick('/ps')}
-          style={linkStyle(hoveredLink === 'ps')}
+          style={linkStyle(hoveredLink === 'ps' || location.pathname === '/ps')}
           onMouseEnter={() => setHoveredLink('ps')}
           onMouseLeave={() => setHoveredLink(null)}
         >
           Planetary Systems Data
-          {!isMobile && <span style={linkUnderlineStyle(hoveredLink === 'ps')}></span>}
+          {!isMobile && <span style={linkUnderlineStyle(hoveredLink === 'ps', location.pathname === '/ps')}></span>}
+        </div>
+        <div
+          onClick={() => handleLinkClick('/about')}
+          style={linkStyle(hoveredLink === 'about' || location.pathname === '/about')}
+          onMouseEnter={() => setHoveredLink('about')}
+          onMouseLeave={() => setHoveredLink(null)}
+        >
+          About
+          {!isMobile && <span style={linkUnderlineStyle(hoveredLink === 'about', location.pathname === '/about')}></span>}
         </div>
       </div>
     </nav>
