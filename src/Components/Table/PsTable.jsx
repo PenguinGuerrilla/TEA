@@ -27,17 +27,21 @@ import Navbar from '../Navbar.jsx';
 
 const PsTable = () => {
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   React.useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       Papa.parse('/PS_only_default_2.csv', {
         download: true,
         header: true,
         complete: (results) => {
           setData(results.data);
+          setIsLoading(false);
         },
         error: (error) => {
           console.error("Error parsing CSV file:", error);
+          setIsLoading(false);
         }
       });
     };
@@ -710,7 +714,17 @@ const PsTable = () => {
               ))}
             </TableHeader>
             <TableBody>
-              {table.getRowModel().rows?.length ? (
+              {isLoading ? (
+                [...Array(15)].map((_, i) => (
+                  <TableRow key={i} className="dark:border-gray-700">
+                    {[...Array(columns.length)].map((_, j) => (
+                      <TableCell key={j} className="whitespace-nowrap px-4 py-2">
+                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : table.getRowModel().rows?.length ? (
                 table.getRowModel().rows.map((row) => (
                   <TableRow
                     key={row.id}
