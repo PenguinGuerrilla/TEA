@@ -34,7 +34,7 @@ const PsTable = () => {
     const fetchData = async () => {
       setIsLoading(true);
       setIsDataLoaded(false);
-      Papa.parse('/PS_only_default_3.csv', {
+      Papa.parse('/PS_only_default_no_duplicates.csv', {
         download: true,
         header: true,
         complete: (results) => {

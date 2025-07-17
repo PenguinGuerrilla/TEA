@@ -36,7 +36,7 @@ const CumulativeTable = () => {
     const fetchData = async () => {
       setIsLoading(true);
       setIsDataLoaded(false);
-      Papa.parse('/cumulative2.csv', {
+      Papa.parse('/cumulative_no_duplicates.csv', {
         download: true,
         header: true,
         complete: (results) => {
