@@ -24,17 +24,19 @@ import React, { useState } from 'react'
 import { ArrowUpDown } from "lucide-react";
 import Papa from 'papaparse';
 import Navbar from "../Navbar";
+import parseLinkAttributes from "@/utils/parseLinkAttributes";
 
 const CumulativeTable = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
 
+
   React.useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       setIsDataLoaded(false);
-      Papa.parse('/cumulative.csv', {
+      Papa.parse('/cumulative2.csv', {
         download: true,
         header: true,
         complete: (results) => {
@@ -123,6 +125,21 @@ const CumulativeTable = () => {
         )
       },
       cell: (props) => <span>{props.getValue()}</span>
+    },
+    {
+      accessorKey: "exomoon_reference",
+      header: ({ column }) => {
+        return (
+          <div className="flex cursor-pointer items-center"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Exomoon Study Reference
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        )
+      },
+      cell: (props) => <a target="_blank" rel="noopener noreferrer" href={parseLinkAttributes(props.getValue()).href} >{parseLinkAttributes(props.getValue()).refstr}</a>
     },
     {
       accessorKey: "koi_disposition",

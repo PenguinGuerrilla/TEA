@@ -70,7 +70,7 @@ const PsTable = () => {
     const fetchData = async () => {
       setIsLoading(true);
       setIsDataLoaded(false);
-      Papa.parse('/PS_only_default_2.csv', {
+      Papa.parse('/PS_only_default_3.csv', {
         download: true,
         header: true,
         complete: (results) => {
@@ -144,19 +144,20 @@ const PsTable = () => {
       cell: (props) => <span>{props.getValue()}</span>
     },
     {
-      accessorKey: "default_flag",
-      header: ({column}) =>{
-        return(
-          <div className="flex cursor-pointer items-center"
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Default Parameter Set
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-            </div>
-            )},
-      cell: (props) => <span>{props.getValue()}</span>
-    },
+          accessorKey: "exomoon_reference",
+          header: ({ column }) => {
+            return (
+              <div className="flex cursor-pointer items-center"
+                variant="ghost"
+                onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+              >
+                Exomoon Study Reference
+                <ArrowUpDown className="ml-2 h-4 w-4" />
+              </div>
+            )
+          },
+          cell: (props) => <a target="_blank" rel="noopener noreferrer" href={parseLinkAttributes(props.getValue()).href} >{parseLinkAttributes(props.getValue()).refstr}</a>
+        },
     {
       accessorKey: "sy_snum",
       header: ({column}) =>{
