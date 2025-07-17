@@ -13,20 +13,21 @@ const parseLinkAttributes = (linkString) => {
     // The browser's parser will automatically create the corresponding DOM nodes.
     tempContainer.innerHTML = linkString;
 
-    // 4. Find the first anchor element ('a') within the temporary container.
-    const anchorElement = tempContainer.querySelector('a');
+    // 4. Find all anchor elements ('a') within the temporary container.
+    const anchorElements = tempContainer.querySelectorAll('a');
 
-    // 5. If an anchor element was found...
-    if (anchorElement) {
-        // ...extract the 'href' and 'refstr' attributes.
-        const href = anchorElement.getAttribute('href');
-        const refstr = anchorElement.getAttribute('refstr');
+    // 5. Map over the NodeList of anchor elements to extract attributes.
+    const attributesList = Array.from(anchorElements).map(anchor => {
+        const href = anchor.getAttribute('href');
+        const refstr = anchor.getAttribute('refstr');
+        return { href, refstr };
+    });
 
-        // 6. Return the extracted data in an object.
-        return {
-            href,
-            refstr
-        };
-    }
+    // 6. Return the array of extracted attributes.
+    // If no anchors were found, this will be an empty array.
+    console.log("Extracted attributes:", attributesList);
+    return attributesList;
+
+    
 }
 export default parseLinkAttributes;

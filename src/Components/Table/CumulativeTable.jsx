@@ -139,7 +139,29 @@ const CumulativeTable = () => {
           </div>
         )
       },
-      cell: (props) => <a target="_blank" rel="noopener noreferrer" href={parseLinkAttributes(props.getValue()).href} >{parseLinkAttributes(props.getValue()).refstr}</a>
+      cell: (props) => {
+        const references = parseLinkAttributes(props.getValue());
+
+        if (!references || references.length === 0) {
+          return null;
+        }
+
+        return (
+          <div className="flex flex-col space-y-1">
+            {references.map((ref, index) => (
+              <a
+                key={index}
+                href={ref.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:underline dark:text-blue-400"
+              >
+                {ref.refstr || 'Link'}
+              </a>
+            ))}
+          </div>
+        );
+      }
     },
     {
       accessorKey: "koi_disposition",
