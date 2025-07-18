@@ -14,6 +14,18 @@ const HomePage = () => {
   const [psData, setPsData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,41 +55,23 @@ const HomePage = () => {
         header: true,
         complete: (results) => {
           setKeplerData(results.data);
-          console.log(results.data);
-          setIsDataLoaded(true);
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 500); // Corresponds to animation duration
         },
         error: (error) => {
           console.error("Error parsing CSV file:", error);
-          setIsLoading(false);
         }
       });
-    };
-
-    fetchData();
-  }, []);
-  React.useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      setIsDataLoaded(false);
-      Papa.parse('/PS_only_default_no_duplicates.cs', {
+      Papa.parse('/PS_only_default_no_duplicates.csv', {
         download: true,
         header: true,
         complete: (results) => {
           setPsData(results.data);
-          console.log(results.data);
-          setIsDataLoaded(true);
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 500); // Corresponds to animation duration
         },
         error: (error) => {
           console.error("Error parsing CSV file:", error);
-          setIsLoading(false);
         }
       });
+      setIsDataLoaded(true);
+      setIsLoading(false);
     };
 
     fetchData();
@@ -168,7 +162,7 @@ const HomePage = () => {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     padding: '2rem',
     borderRadius: '10px',
-    width: '50vh',
+    width: '100%',
     textAlign: 'center',
   };
 
@@ -181,6 +175,16 @@ const HomePage = () => {
   const cardValueStyle = {
     fontSize: '2.5rem',
     fontWeight: 'bold',
+  };
+
+  const secondDivContainerStyle = {
+    ...pageStyle,
+    opacity: showSecondDiv ? 1 : 0,
+    display: 'flex',
+    flexDirection: isMobile ? 'column' : 'row',
+    alignItems: 'center',
+    margin: isMobile ? 0 : '0 3rem',
+    width: '100%',
   };
 
   return (
@@ -205,7 +209,7 @@ const HomePage = () => {
             </h1>
 
             <div >
-              <p style={{...paragraphStyle, textAlign: 'center'}}>
+              <p style={{...paragraphStyle, textAlign: 'center', marginTop: '1rem'}}>
                 The exomoon archive is a comprehensive dataset of exoplanets analyzed as potential hosts for exomoons.
                 This archive is designed to facilitate research and exploration in the field of exoplanetary science,
                 providing a valuable resource for scientists and enthusiasts alike.
@@ -232,8 +236,8 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        <div ref={secondDivRef} style={{ ...pageStyle, opacity: showSecondDiv ? 1 : 0, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-          <div style={{ flex: 1, paddingRight: '2rem', textAlign: 'left' }}>
+        <div ref={secondDivRef} style={secondDivContainerStyle}>
+          <div style={{ flex: 1, paddingRight: isMobile ? 0 : '2rem', paddingBottom: isMobile ? '2rem' : 0, textAlign: 'left' }}>
             <div style={textContainerStyle}>
               <p style={paragraphStyle}>
                 <h2 style={{ ...titleStyle, fontSize: '2rem' }}>What is an Exomoon?</h2>
@@ -253,7 +257,7 @@ const HomePage = () => {
               </p>
             </div>
           </div>
-          <div style={{ flex: 1, paddingLeft: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '80vh' }}>
+          <div style={{ flex: 1, paddingLeft: isMobile ? 0 : '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '80vh',  }}>
             <h2 style={{...titleStyle, }}>Data at a Glance</h2>
             <div style={cardContainerStyle}>
               <div style={cardStyle}>
@@ -261,6 +265,7 @@ const HomePage = () => {
                 <h3 style={cardTitleStyle}>Exoplanets Analyzed</h3>
               </div>
               <div style={cardStyle}>
+                {/* todo: add dynamic reference once articles page is */}
                 <p style={cardValueStyle}>18</p>
                 <h3 style={cardTitleStyle}>Papers Explored</h3>
               </div>
