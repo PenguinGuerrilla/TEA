@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 import About from './Pages/About.jsx'
 import CumulativeKeplerData from './Pages/CumulativeKeplerData'
 import PlanetarySystemsData from './Pages/PlanetarySystemsData'
+import PapersExplored from './Pages/PapersExplored'
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <Route path='/about' element={<About/>}></Route>
       <Route path='/cumulative' element={<CumulativeKeplerData/>}></Route>
       <Route path='/ps' element={<PlanetarySystemsData/>}></Route>
+      <Route path='/papers' element={<PapersExplored/>}></Route>
     </Routes>
   )
 }

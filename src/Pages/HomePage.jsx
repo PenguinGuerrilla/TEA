@@ -55,23 +55,41 @@ const HomePage = () => {
         header: true,
         complete: (results) => {
           setKeplerData(results.data);
+          console.log(results.data);
+          setIsDataLoaded(true);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 500); // Corresponds to animation duration
         },
         error: (error) => {
           console.error("Error parsing CSV file:", error);
+          setIsLoading(false);
         }
       });
-      Papa.parse('/PS_only_default_no_duplicates.csv', {
+    };
+
+    fetchData();
+  }, []);
+  React.useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      setIsDataLoaded(false);
+      Papa.parse('/PS_only_default_no_duplicates.cs', {
         download: true,
         header: true,
         complete: (results) => {
           setPsData(results.data);
+          console.log(results.data);
+          setIsDataLoaded(true);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 500); // Corresponds to animation duration
         },
         error: (error) => {
           console.error("Error parsing CSV file:", error);
+          setIsLoading(false);
         }
       });
-      setIsDataLoaded(true);
-      setIsLoading(false);
     };
 
     fetchData();
@@ -183,7 +201,6 @@ const HomePage = () => {
     display: 'flex',
     flexDirection: isMobile ? 'column' : 'row',
     alignItems: 'center',
-    margin: isMobile ? 0 : '0 3rem',
     width: '100%',
   };
 
