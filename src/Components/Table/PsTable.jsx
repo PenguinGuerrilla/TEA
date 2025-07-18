@@ -745,7 +745,6 @@ const PsTable = () => {
 
   return (
     <>
-      <Navbar />
       <div className="rounded-sm border border-gray-200 bg-white px-5 pt-6 pb-2.5 shadow-md sm:px-7.5 xl:pb-1 dark:bg-gray-900 dark:border-gray-700">
         <div className="mb-6">
           <h4 className="text-xl font-semibold text-black mb-2 dark:text-white">
