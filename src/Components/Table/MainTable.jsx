@@ -30,6 +30,7 @@ import { ChevronDown, Search } from "lucide-react"
 
 import React, { useState } from 'react'
 import "./table.css";
+import ExcelExport from "@/utils/ExcelExport"
 
 const MainTable = ({ data, columns, isLoading, isDataLoaded, title }) => {
 
@@ -109,6 +110,7 @@ const MainTable = ({ data, columns, isLoading, isDataLoaded, title }) => {
                                     })}
                             </DropdownMenuContent>
                         </DropdownMenu>
+                        <ExcelExport selectedRows={table.getFilteredSelectedRowModel().rows} AllRows={table.getCoreRowModel().rows} fileName={title}/>
                     </div>
                 </div>
 
