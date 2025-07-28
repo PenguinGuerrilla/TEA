@@ -71,8 +71,8 @@ const MainTable = ({ data, columns, isLoading, isDataLoaded, title }) => {
                     <h4 className="text-xl font-semibold text-black mb-2 dark:text-white">
                         {title}
                     </h4>
-                    <div className="flex items-center justify-between">
-                        <div className="relative w-1/3">
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div className="relative w-full sm:w-1/3">
                             <input
                                 type="text"
                                 value={globalFilter ?? ''}
