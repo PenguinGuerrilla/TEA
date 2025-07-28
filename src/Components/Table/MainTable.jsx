@@ -19,143 +19,18 @@ import {
 } from "@/components/ui/table"
 
 // import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
-import React, { use, useMemo, useState } from 'react'
+import React, { useState } from 'react'
 // import DATA from './data';
 import { ArrowUpDown } from "lucide-react";
 import Papa from 'papaparse';
 import Navbar from "../Navbar";
-import parseLinkAttributes from "@/utils/parseLinkAttributes";
 
-const CumulativeTable = () => {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isDataLoaded, setIsDataLoaded] = useState(false);
+const MainTable = ({data,columns,isLoading,isDataLoaded}) => {
 
-
-  React.useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      setIsDataLoaded(false);
-      Papa.parse('/papers.csv', {
-        download: true,
-        header: true,
-        complete: (results) => {
-          setData(results.data);
-          setIsDataLoaded(true);
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 500); // Corresponds to animation duration
-        },
-        error: (error) => {
-          console.error("Error parsing CSV file:", error);
-          setIsLoading(false);
-        }
-      });
-    };
-
-    fetchData();
-    console.log("Data fetched:", data);
-  }, []);
-  const [columnFilters, setColumnFilters] = React.useState([]);
-  const columns = [
-    {
-      id: "select",
-      header: ({ table }) => (
-        <input
-          type="checkbox"
-          {...{
-            checked: table.getIsAllRowsSelected(),
-            indeterminate: table.getIsSomeRowsSelected(),
-            onChange: table.getToggleAllRowsSelectedHandler(),
-          }}
-        />
-      ),
-      cell: ({ row }) => (
-        <input
-          type="checkbox"
-          {...{
-            checked: row.getIsSelected(),
-            disabled: !row.getCanSelect(),
-            indeterminate: row.getIsSomeSelected(),
-            onChange: row.getToggleSelectedHandler(),
-          }}
-        />
-      ),
-      size: 10,
-    },
-    {
-      accessorKey: "title",
-      header: ({ column }) => {
-        return (
-          <div className="flex cursor-pointer items-center"
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Article Title
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </div>
-        )
-      },
-      cell: (props) => <span>{props.getValue()}</span>
-    },
-    {
-      accessorKey: "source",
-      header: ({ column }) => {
-        return (
-          <div className="flex cursor-pointer items-center"
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Source
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </div>
-        )
-      },
-      cell: (props) => {
-        const references = parseLinkAttributes(props.getValue());
-
-        if (!references || references.length === 0) {
-          return null;
-        }
-
-        return (
-          <div className="flex flex-col space-y-1">
-            {references.map((ref, index) => (
-              <a
-                key={index}
-                href={ref.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:underline dark:text-blue-400"
-              >
-                {ref.refstr || 'Link'}
-              </a>
-            ))}
-          </div>
-        );
-      }
-    },
-    {
-      accessorKey: "exoplanets_analyzed",
-      header: ({ column }) => {
-        return (
-          <div className="flex cursor-pointer items-center"
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Exoplanets Analyzed
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </div>
-        )
-      },
-      cell: (props) => <span>{props.getValue()}</span>
-    },
-
-
-  ];
-  const [rowSelection, setRowSelection] = React.useState({});
-  const [globalFilter, setGlobalFilter] = React.useState('');
-  const [pagination, setPagination] = React.useState({
+  const [columnFilters, setColumnFilters] = useState([]);
+  const [rowSelection, setRowSelection] = useState({});
+  const [globalFilter, setGlobalFilter] = useState('');
+  const [pagination, setPagination] = useState({
     pageIndex: 0, //initial page index
     pageSize: 15, //default page size
   });
@@ -171,9 +46,6 @@ const CumulativeTable = () => {
     onPaginationChange: setPagination,
     onGlobalFilterChange: setGlobalFilter,
     onRowSelectionChange: setRowSelection,
-    columnResizeMode: 'onChange',
-    columnResizeDirection: "ltr",
-    enableColumnResizing: true,
     state: {
       columnFilters,
       pagination,
@@ -187,7 +59,7 @@ const CumulativeTable = () => {
       <div className="rounded-sm border border-gray-200 bg-white px-5 pt-6 pb-2.5 shadow-md sm:px-7.5 xl:pb-1 dark:bg-gray-900 dark:border-gray-700">
         <div className="mb-6">
           <h4 className="text-xl font-semibold text-black mb-2 dark:text-white">
-            Scientific Papers Explored
+            Cumulative Kepler Data
           </h4>
           <input
             type="text"
@@ -308,4 +180,4 @@ const CumulativeTable = () => {
   );
 };
 
-export default CumulativeTable
+export default MainTable

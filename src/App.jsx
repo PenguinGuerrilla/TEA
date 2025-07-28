@@ -2,9 +2,9 @@ import './App.css'
 import HomePage from './Pages/HomePage'
 import { Route, Routes } from 'react-router-dom'
 import About from './Pages/About.jsx'
-import CumulativeKeplerData from './Pages/CumulativeKeplerData'
-import PlanetarySystemsData from './Pages/PlanetarySystemsData'
-import PapersExplored from './Pages/PapersExplored'
+import CumulativeKeplerData from './Pages/CumulativeKeplerData/CumulativeKeplerData'
+import PlanetarySystemsData from './Pages/PlanetarySystemsData/PlanetarySystemsData'
+import PapersExplored from './Pages/PapersExplored/PapersExplored'
 
 function App() {
 
