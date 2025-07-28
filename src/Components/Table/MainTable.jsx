@@ -21,11 +21,11 @@ import {
 // import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import React, { useState } from 'react'
 // import DATA from './data';
-import { ArrowUpDown } from "lucide-react";
+import "./table.css";
 import Papa from 'papaparse';
 import Navbar from "../Navbar";
 
-const MainTable = ({data,columns,isLoading,isDataLoaded}) => {
+const MainTable = ({data,columns,isLoading,isDataLoaded, title}) => {
 
   const [columnFilters, setColumnFilters] = useState([]);
   const [rowSelection, setRowSelection] = useState({});
@@ -59,7 +59,7 @@ const MainTable = ({data,columns,isLoading,isDataLoaded}) => {
       <div className="rounded-sm border border-gray-200 bg-white px-5 pt-6 pb-2.5 shadow-md sm:px-7.5 xl:pb-1 dark:bg-gray-900 dark:border-gray-700">
         <div className="mb-6">
           <h4 className="text-xl font-semibold text-black mb-2 dark:text-white">
-            Cumulative Kepler Data
+            {title}
           </h4>
           <input
             type="text"
@@ -78,7 +78,7 @@ const MainTable = ({data,columns,isLoading,isDataLoaded}) => {
                 <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
                     return (
-                      <TableHead key={header.id} className="whitespace-nowrap px-4 py-3 text-xs font-medium uppercase text-gray-600 dark:text-gray-400">
+                      <TableHead key={header.id} className={`px-4 py-3 text-xs font-medium uppercase text-gray-600 dark:text-gray-400 `}>
                         {header.isPlaceholder
                           ? null
                           : flexRender(
@@ -110,7 +110,7 @@ const MainTable = ({data,columns,isLoading,isDataLoaded}) => {
                     className="dark:border-gray-700"
                   >
                     {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id} className="whitespace-nowrap px-4 py-2 dark:text-gray-300">
+                      <TableCell key={cell.id} className="px-4 py-2 dark:text-gray-300 whitespace-normal">
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </TableCell>
                     ))}

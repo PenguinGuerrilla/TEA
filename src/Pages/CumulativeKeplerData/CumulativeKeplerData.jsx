@@ -1,5 +1,4 @@
 import Navbar from '@/Components/Navbar'
-import CumulativeTable from '@/Components/Table/CumulativeTable'
 import React, { useState } from 'react'
 import Papa from 'papaparse';
 import MainTable from '@/Components/Table/MainTable';
@@ -36,7 +35,7 @@ const CumulativeKeplerData = () => {
         <>
             <Navbar />
             <div style={{ padding: '15px', color: '#fff', backgroundColor: '#0b0f19', height: '100%', width: '100%' }}>
-                <MainTable data={data} columns={columns} isDataLoaded={isDataLoaded} isLoading={isLoading} />
+                <MainTable data={data} columns={columns} isDataLoaded={isDataLoaded} isLoading={isLoading} title={"Cumulative Kepler Data"} />
             </div>
         </>
     )

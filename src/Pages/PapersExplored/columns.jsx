@@ -24,13 +24,12 @@ import parseLinkAttributes from "@/utils/parseLinkAttributes";
           }}
         />
       ),
-      size: 10,
     },
     {
       accessorKey: "title",
       header: ({ column }) => {
         return (
-          <div className="flex cursor-pointer items-center"
+          <div className="flex cursor-pointer items-center justify-center"
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
@@ -39,13 +38,13 @@ import parseLinkAttributes from "@/utils/parseLinkAttributes";
           </div>
         )
       },
-      cell: (props) => <span>{props.getValue()}</span>
+      cell: (props) => <div className=" whitespace-normal">{props.getValue()}</div>
     },
     {
       accessorKey: "source",
       header: ({ column }) => {
         return (
-          <div className="flex cursor-pointer items-center"
+          <div className="flex cursor-pointer items-center justify-center"
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
@@ -82,7 +81,7 @@ import parseLinkAttributes from "@/utils/parseLinkAttributes";
       accessorKey: "exoplanets_analyzed",
       header: ({ column }) => {
         return (
-          <div className="flex cursor-pointer items-center"
+          <div className="flex cursor-pointer items-center justify-center"
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >

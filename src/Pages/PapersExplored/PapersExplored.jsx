@@ -1,6 +1,5 @@
 import Navbar from '@/Components/Navbar'
 import React, { useState } from 'react'
-import PapersTable from '@/Components/Table/PapersTable'
 import Papa from 'papaparse';
 import MainTable from '@/Components/Table/MainTable';
 import columns from './columns';
@@ -40,7 +39,7 @@ const PapersExplored = () => {
         <>
             <Navbar />
             <div style={{ padding: '15px', color: '#fff', backgroundColor: '#0b0f19', height: '100%', width: '100%' }}>
-                <MainTable data={data} columns={columns} isLoading={isLoading} isDataLoaded={isDataLoaded} />
+                <MainTable data={data} columns={columns} isLoading={isLoading} isDataLoaded={isDataLoaded}  title = {"Scientific Papers Explored"} />
             </div>
         </>
     )

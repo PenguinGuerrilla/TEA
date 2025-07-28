@@ -37,7 +37,7 @@ const PlanetarySystemsData = () => {
         <>
             <Navbar />
             <div style={{ padding: '15px', color: '#fff', backgroundColor: '#0b0f19', height: '100%', width: '100%' }}>
-                <MainTable data={data} columns={columns} isDataLoaded={isDataLoaded} isLoading={isLoading}/>
+                <MainTable data={data} columns={columns} isDataLoaded={isDataLoaded} isLoading={isLoading} title={"Planetary Systems Data"}/>
             </div>
         </>
     )
