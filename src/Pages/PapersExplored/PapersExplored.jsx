@@ -33,7 +33,7 @@ const PapersExplored = () => {
         };
     
         fetchData();
-        console.log("Data fetched:", data);
+        // console.log("Data fetched:", data);
       }, []);
     return (
         <>

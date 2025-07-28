@@ -25,7 +25,7 @@ const parseLinkAttributes = (linkString) => {
 
     // 6. Return the array of extracted attributes.
     // If no anchors were found, this will be an empty array.
-    console.log("Extracted attributes:", attributesList);
+    // console.log("Extracted attributes:", attributesList);
     return attributesList;
 
     

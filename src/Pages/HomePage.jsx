@@ -12,8 +12,8 @@ const HomePage = () => {
   const secondDivRef = useRef(null);
   const [keplerData, setKeplerData] = useState([]);
   const [psData, setPsData] = useState([]);
-  const [ setIsLoading] = useState(true);
-  const [ setIsDataLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const HomePage = () => {
         header: true,
         complete: (results) => {
           setKeplerData(results.data);
-          console.log(results.data);
+          // console.log(results.data);
           setIsDataLoaded(true);
           setTimeout(() => {
             setIsLoading(false);
@@ -79,7 +79,7 @@ const HomePage = () => {
         header: true,
         complete: (results) => {
           setPsData(results.data);
-          console.log(results.data);
+          // console.log(results.data);
           setIsDataLoaded(true);
           setTimeout(() => {
             setIsLoading(false);
