@@ -226,7 +226,7 @@ const HomePage = () => {
             </h1>
 
             <div >
-              <p style={{...paragraphStyle, textAlign: 'center', marginTop: '1rem'}}>
+              <p style={{ ...paragraphStyle, textAlign: 'center', marginTop: '1rem' }}>
                 The exomoon archive is a comprehensive dataset of exoplanets analyzed as potential hosts for exomoons.
                 This archive is designed to facilitate research and exploration in the field of exoplanetary science,
                 providing a valuable resource for scientists and enthusiasts alike.
@@ -265,7 +265,7 @@ const HomePage = () => {
                 <br /><br />
                 First, it would provide a crucial new testing ground for theories of planet and moon formation. Scientists have detailed models for how the moons of our Solar System formed—either through co-accretion with their planet, capture of a passing object, or from a giant impact. Finding moons in other systems would allow us to see if these processes are universal or if other mechanisms are at play.
                 <br /><br />
-                Second, the discovery would have profound implications for astrobiology. A large, rocky exomoon orbiting a gas giant within its star's habitable zone could be a prime candidate for hosting liquid water and, potentially, life. This idea, popularized by science fiction, suggests that even if a giant planet itself is inhospitable, its moons could be habitable worlds. Finding such a moon would vastly expand the search for life beyond Earth. 
+                Second, the discovery would have profound implications for astrobiology. A large, rocky exomoon orbiting a gas giant within its star's habitable zone could be a prime candidate for hosting liquid water and, potentially, life. This idea, popularized by science fiction, suggests that even if a giant planet itself is inhospitable, its moons could be habitable worlds. Finding such a moon would vastly expand the search for life beyond Earth.
                 <br /><br />
                 Finally, studying exomoons would give us a more complete picture of planetary system dynamics. The presence, size, and orbit of moons can influence a planet's rotation, tides, and long-term climate stability—factors that can be critical for habitability.
                 <br /><br />
@@ -274,14 +274,14 @@ const HomePage = () => {
               </p>
             </div>
           </div>
-          <div style={{ flex: 1, paddingLeft: isMobile ? 0 : '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '80vh',  }}>
-            <h2 style={{...titleStyle, }}>Data at a Glance</h2>
+          <div style={{ flex: 1, paddingLeft: isMobile ? 0 : '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '80vh', }}>
+            <h2 style={{ ...titleStyle, }}>Data at a Glance</h2>
             <div style={cardContainerStyle}>
-              <div style={cardStyle}>
+              <div style={{ ...cardStyle, cursor: "pointer" }} onClick={() => navigate('/cumulative')} >
                 <p style={cardValueStyle}>{keplerData.length + psData.length}</p>
                 <h3 style={cardTitleStyle}>Exoplanets Analyzed</h3>
               </div>
-              <div style={cardStyle}>
+              <div style={{ ...cardStyle, cursor: "pointer" }} onClick={() => navigate('/papers')}>
                 {/* todo: add dynamic reference once articles page is */}
                 <p style={cardValueStyle}>18</p>
                 <h3 style={cardTitleStyle}>Papers Explored</h3>

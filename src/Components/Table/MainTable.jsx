@@ -16,7 +16,7 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-} from "@/components/ui/table"
+} from "@/Components/ui/table"
 
 import {
     DropdownMenu,
@@ -25,7 +25,7 @@ import {
     DropdownMenuTrigger,
 } from "@/Components/ui/dropdown-menu"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/Components/ui/button"
 import { ChevronDown, Search } from "lucide-react"
 
 import React, { useState } from 'react'
