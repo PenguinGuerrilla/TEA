@@ -24,6 +24,8 @@ import parseLinkAttributes from "@/utils/parseLinkAttributes";
           }}
         />
       ),
+      enableSorting: false,
+      enableHiding: false,
     },
     {
       accessorKey: "title",
@@ -34,7 +36,7 @@ import parseLinkAttributes from "@/utils/parseLinkAttributes";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Article Title
-            <ArrowUpDown className="ml-2 h-4 w-4" />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
           </div>
         )
       },
@@ -49,7 +51,7 @@ import parseLinkAttributes from "@/utils/parseLinkAttributes";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Source
-            <ArrowUpDown className="ml-2 h-4 w-4" />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
           </div>
         )
       },
@@ -86,7 +88,7 @@ import parseLinkAttributes from "@/utils/parseLinkAttributes";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Exoplanets Analyzed
-            <ArrowUpDown className="ml-2 h-4 w-4" />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
           </div>
         )
       },

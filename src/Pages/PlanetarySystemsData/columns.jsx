@@ -24,6 +24,8 @@ const columns = [
                 }}
             />
         ),
+        enableSorting: false,
+        enableHiding: false,
     },
     {
         accessorKey: "pl_name",
@@ -34,7 +36,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Planet Name
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -49,7 +51,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Host Name
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -64,7 +66,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Exomoon Study Reference
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -101,7 +103,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Number of Stars
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -116,7 +118,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Number of Planets
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -131,7 +133,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Discovery Method
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -146,7 +148,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Discovery Year
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -161,7 +163,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Discovery Facility
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -176,7 +178,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Solution Type
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -191,7 +193,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Planetary Parameter Reference
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -206,7 +208,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Orbital Period
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -221,7 +223,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Orbit Semi-Major Axis
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -236,7 +238,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Planet Radius
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -251,7 +253,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Planet Radius
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -266,7 +268,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Planet Mass or Mass*sin(i)
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -281,7 +283,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Planet Mass or Mass*sin(i)
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -296,7 +298,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Planet Mass or Mass*sin(i) Provenance
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -311,7 +313,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Eccentricity
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -326,7 +328,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Insolation Flux
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -341,7 +343,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Equilibrium Temperature
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -356,7 +358,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Data show Transit Timing Variations
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -371,7 +373,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Stellar Parameter Reference
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -386,7 +388,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Spectral Type
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -401,7 +403,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Stellar Effective Temperature
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -416,7 +418,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Stellar Radius
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -431,7 +433,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Stellar Mass
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -446,7 +448,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Stellar Metallicity
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -461,7 +463,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Stellar Metallicity Ratio
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -476,7 +478,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Stellar Surface Gravity
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -491,7 +493,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     System Parameter Reference
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -506,7 +508,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     RA
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -521,7 +523,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     RA
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -536,7 +538,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Dec
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -551,7 +553,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Dec
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -566,7 +568,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Distance
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -581,7 +583,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     V (Johnson) Magnitude
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -596,7 +598,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Ks (2MASS) Magnitude
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -611,7 +613,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Gaia Magnitude
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -626,7 +628,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Date of Last Update
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -641,7 +643,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Planetary Parameter Reference Publication Date
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
@@ -656,7 +658,7 @@ const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Release Date
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
         },
