@@ -12,8 +12,8 @@ const HomePage = () => {
   const secondDivRef = useRef(null);
   const [keplerData, setKeplerData] = useState([]);
   const [psData, setPsData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [ setIsLoading] = useState(true);
+  const [ setIsDataLoaded] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {

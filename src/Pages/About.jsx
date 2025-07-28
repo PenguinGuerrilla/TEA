@@ -1,23 +1,10 @@
 import Navbar from '@/Components/Navbar';
 import React from 'react';
-import { FaDatabase, FaQuestion, FaCode, FaUser, FaRobot } from 'react-icons/fa';
+import { FaDatabase, FaQuestion, FaCode} from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 const About = () => {
     const navigate = useNavigate();
-    const teamMembers = [
-        {
-            name: 'Henrique Silva',
-            role: 'Front-End Developer',
-            bio: 'Henrique is a passionate Front-End Developer with experience in creating beautiful and responsive user interfaces. He is skilled in React, Tailwind CSS, and other modern web technologies.',
-            icon: <FaUser className="w-12 h-12 text-indigo-400" />,
-        },
-        {
-            name: 'Gemini',
-            role: 'AI Assistant',
-            bio: 'Gemini is a powerful AI assistant that helps with a variety of tasks, from generating code to answering questions. It is an expert in many different fields and is always learning new things.',
-            icon: <FaRobot className="w-12 h-12 text-indigo-400" />,
-        },
-    ];
+
 
     const Card = ({ icon, title, children }) => (
         <div className="bg-gray-800/50 backdrop-blur-lg p-8 rounded-2xl border border-gray-700/50 shadow-lg hover:shadow-indigo-500/20 transition-shadow duration-300 flex flex-col h-[450px]">
