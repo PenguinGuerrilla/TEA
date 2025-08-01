@@ -53,7 +53,7 @@ const About = () => {
                         Furthermore a range of exomoon detection techniques were also explored by different articles, like the transit method, that is, direct photometric observations of
                         transiting exoplanets, the observation of dynamic effects such as Transit Timing Variations (TTV), Orbital Sampling
                         Effects (OSE), and detection of planet moon interaction signatures.
-                        With a list of selected articles a list of exoplanets that have been analyzed as possible exomoon hosts was elaborated and used to search the
+                        With a list of selected articles a list of exoplanets that have been analyzed as possible exomoon hosts was elaborated and used to search the NASA Exoplanet Archive
                     </Card>
                 </div>
 

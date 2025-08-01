@@ -37,7 +37,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Kepler ID
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
@@ -52,7 +52,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             KOI Name
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
@@ -67,7 +67,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Kepler Name
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
@@ -82,7 +82,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Exomoon Study Reference
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
@@ -119,7 +119,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Exoplanet Archive Disposition
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
@@ -134,7 +134,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Disposition Using Kepler Data
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
@@ -149,7 +149,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Disposition Score
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
@@ -164,7 +164,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Orbital Period
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
@@ -180,7 +180,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Equilibrium Temperature
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
@@ -195,7 +195,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Stellar Radius
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
@@ -211,7 +211,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Transit Epoch
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
@@ -227,7 +227,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Impact Parameter
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
@@ -243,7 +243,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Transit Duration
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
@@ -259,7 +259,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Transit Depth
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
@@ -275,7 +275,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Planetary Radius
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
@@ -292,7 +292,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Insolation Flux
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
@@ -308,7 +308,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Transit Signal-to-Noise
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
@@ -324,7 +324,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             TCE Planet Number
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
@@ -340,7 +340,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             TCE Delivery
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
@@ -356,7 +356,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Stellar Effective Temperature
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
@@ -372,7 +372,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Stellar Surface Gravity
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
@@ -388,7 +388,7 @@ import { ArrowUpDown } from "lucide-react";
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Kepler-band
-            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
+            <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
       },
