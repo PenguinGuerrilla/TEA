@@ -2,7 +2,9 @@
 
 **TEA (The Exomoon Archive)** is a web application built to explore and visualize astronomical data. The project's goal is to create a comprehensive dataset of exoplanets discussed in exomoon research, serving as a centralized resource for the scientific community to advance the search for moons beyond our solar system.
 
-![Project Logo](public/logo.png)
+<p align="center">
+  <img src="public/logo.png" width="300" alt="Project Logo">
+</p>
 
 ## ✨ Features
 
@@ -31,7 +33,9 @@
 
 **TEA (The Exomoon Archive)** é uma aplicação web construída para explorar e visualizar dados astronômicos. O objetivo do projeto é criar um conjunto de dados abrangente de exoplanetas discutidos em pesquisas sobre exoluas, servindo como um recurso centralizado para a comunidade científica avançar na busca por luas além do nosso sistema solar.
 
-![Project Logo](public/logo.png)
+<p align="center">
+  <img src="public/logo.png" width="300" alt="Project Logo">
+</p>
 
 ## ✨ Funcionalidades
 
