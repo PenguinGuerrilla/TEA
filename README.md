@@ -26,6 +26,56 @@
 -   **Data Parsing:** [PapaParse](https://www.papaparse.com/) for CSV files
 -   **Excel Export:** [XLSX](https://github.com/SheetJS/sheetjs) (SheetJS)
 
+## ⚙️ Getting Started
+
+Follow these instructions to get a copy of the project up and running on your local machine.
+
+### Prerequisites
+
+-   [Node.js](https://nodejs.org/) (v18 or higher recommended)
+-   [npm](https://www.npmjs.com/) (comes with Node.js)
+
+### Installation
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/your-username/your-repo-name.git
+    cd your-repo-name
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+
+The application will be available at `http://localhost:5173`.
+
+## 📁 Project Structure
+
+The project is organized as follows:
+
+```
+/
+├── public/                  # Static assets and CSV data files
+├── src/
+│   ├── assets/              # React and other static assets
+│   ├── blocks/              # Self-contained, larger components (e.g., backgrounds)
+│   ├── Components/          # Reusable UI components (Navbar, Table, etc.)
+│   ├── lib/                 # Utility hooks and functions
+│   ├── Pages/               # Main pages for different data views
+│   ├── utils/               # Helper utilities (e.g., Excel export)
+│   ├── App.jsx              # Main application component
+│   ├── main.jsx             # Entry point of the application
+│   └── index.css            # Global styles
+├── .gitignore
+├── package.json
+└── vite.config.js
+```
 
 ---
 
