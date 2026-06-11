@@ -5,6 +5,9 @@ import About from './Pages/About.jsx'
 import CumulativeKeplerData from './Pages/CumulativeKeplerData/CumulativeKeplerData'
 import PlanetarySystemsData from './Pages/PlanetarySystemsData/PlanetarySystemsData'
 import PapersExplored from './Pages/PapersExplored/PapersExplored'
+import { lazy, Suspense } from 'react'
+
+const Statistics = lazy(() => import('./Pages/Statistics/Statistics'))
 
 function App() {
 
@@ -15,6 +18,7 @@ function App() {
       <Route path='/cumulative' element={<CumulativeKeplerData/>}></Route>
       <Route path='/ps' element={<PlanetarySystemsData/>}></Route>
       <Route path='/papers' element={<PapersExplored/>}></Route>
+      <Route path='/stats' element={<Suspense fallback={null}><Statistics/></Suspense>}></Route>
     </Routes>
   )
 }
