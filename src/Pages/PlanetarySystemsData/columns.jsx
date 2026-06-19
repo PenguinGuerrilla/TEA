@@ -194,7 +194,7 @@ const columns = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Orbital Period
+                    Orbital Period [days]
                     <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
@@ -209,7 +209,7 @@ const columns = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Orbit Semi-Major Axis
+                    Orbit Semi-Major Axis [au]
                     <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
@@ -224,7 +224,7 @@ const columns = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Planet Radius
+                    Planet Radius [Earth Radius]
                     <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
@@ -239,7 +239,7 @@ const columns = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Planet Radius
+                    Planet Radius [Jupiter Radius]
                     <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
@@ -254,7 +254,7 @@ const columns = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Planet Mass or Mass*sin(i)
+                    Planet Mass or Mass*sin(i) [Earth Mass]
                     <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
@@ -269,7 +269,7 @@ const columns = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Planet Mass or Mass*sin(i)
+                    Planet Mass or Mass*sin(i) [Jupiter Mass]
                     <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
@@ -314,7 +314,7 @@ const columns = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Insolation Flux
+                    Insolation Flux [Earth Flux]
                     <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
@@ -329,7 +329,7 @@ const columns = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Equilibrium Temperature
+                    Equilibrium Temperature [K]
                     <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
@@ -375,7 +375,7 @@ const columns = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Stellar Effective Temperature
+                    Stellar Effective Temperature [K]
                     <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
@@ -390,7 +390,7 @@ const columns = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Stellar Radius
+                    Stellar Radius [Solar Radius]
                     <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
@@ -405,7 +405,7 @@ const columns = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Stellar Mass
+                    Stellar Mass [Solar mass]
                     <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
@@ -420,7 +420,7 @@ const columns = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Stellar Metallicity
+                    Stellar Metallicity [dex]
                     <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
@@ -450,7 +450,7 @@ const columns = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Stellar Surface Gravity
+                    Stellar Surface Gravity [log10(cm/s²)]
                     <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
@@ -466,7 +466,7 @@ const columns = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    RA
+                    RA [sexagesimal]
                     <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
@@ -481,7 +481,7 @@ const columns = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    RA
+                    RA [deg]
                     <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
@@ -496,7 +496,7 @@ const columns = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Dec
+                    Dec [sexagesimal]
                     <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
@@ -511,7 +511,7 @@ const columns = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Dec
+                    Dec [deg]
                     <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )
@@ -526,7 +526,7 @@ const columns = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Distance
+                    Distance [pc]
                     <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-purple-500' : ''}`} />
                 </div>
             )

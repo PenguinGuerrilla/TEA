@@ -178,6 +178,15 @@ const Navbar = () => {
           {!isMobile && <span style={linkUnderlineStyle(hoveredLink === 'ps', location.pathname === '/ps')}></span>}
         </div>
         <div
+          onClick={() => handleLinkClick('/combined')}
+          style={linkStyle(hoveredLink === 'combined' || location.pathname === '/combined')}
+          onMouseEnter={() => setHoveredLink('combined')}
+          onMouseLeave={() => setHoveredLink(null)}
+        >
+          Combined Data
+          {!isMobile && <span style={linkUnderlineStyle(hoveredLink === 'combined', location.pathname === '/combined')}></span>}
+        </div>
+        <div
           onClick={() => handleLinkClick('/papers')}
           style={linkStyle(hoveredLink === 'papers' || location.pathname === '/papers')}
           onMouseEnter={() => setHoveredLink('papers')}

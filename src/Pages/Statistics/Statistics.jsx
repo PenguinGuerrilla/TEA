@@ -4,6 +4,7 @@ import Papa from 'papaparse';
 import Plotly from 'plotly.js-dist-min';
 import createPlotlyComponent from 'react-plotly.js/factory';
 import { getColumnLabel } from './columnLabels';
+import { buildCombinedData } from '@/utils/buildCombinedData';
 
 const Plot = createPlotlyComponent(Plotly);
 
@@ -18,6 +19,12 @@ const DATASETS = {
         label: 'Planetary Systems Data',
         file: '/PS_only_default_no_duplicates.csv',
         backgroundFile: '/AllNEAData/ps_background.csv',
+        idKey: 'pl_name',
+    },
+    combined: {
+        // Built in-memory from the cumulative + ps datasets; no file to download.
+        label: 'Combined Data',
+        backgroundFile: null,
         idKey: 'pl_name',
     },
 };
@@ -123,7 +130,7 @@ const buttonStyle = {
 
 const Statistics = () => {
     const [datasetKey, setDatasetKey] = useState('cumulative');
-    const [allData, setAllData] = useState({ cumulative: null, ps: null });
+    const [allData, setAllData] = useState({ cumulative: null, ps: null, combined: null });
     const [isLoading, setIsLoading] = useState(true);
     const [xCol, setXCol] = useState('');
     const [yCol, setYCol] = useState('');
@@ -133,7 +140,7 @@ const Statistics = () => {
     const [logY, setLogY] = useState(false);
     const [cumulativeCount, setCumulativeCount] = useState(false);
     const [showBackground, setShowBackground] = useState(false);
-    const [backgroundData, setBackgroundData] = useState({ cumulative: null, ps: null });
+    const [backgroundData, setBackgroundData] = useState({ cumulative: null, ps: null, combined: null });
     const [isBackgroundLoading, setIsBackgroundLoading] = useState(false);
     const plotRef = useRef(null);
 
@@ -153,7 +160,7 @@ const Statistics = () => {
         });
         Promise.all([load('cumulative'), load('ps')]).then(([cumulative, ps]) => {
             if (cancelled) return;
-            setAllData({ cumulative, ps });
+            setAllData({ cumulative, ps, combined: buildCombinedData(cumulative, ps) });
             setIsLoading(false);
         });
         return () => { cancelled = true; };
@@ -162,6 +169,7 @@ const Statistics = () => {
     // Lazy-load background NEA data the first time it's requested per dataset
     useEffect(() => {
         if (!showBackground || backgroundData[datasetKey]) return;
+        if (!DATASETS[datasetKey].backgroundFile) return;
         setIsBackgroundLoading(true);
         Papa.parse(DATASETS[datasetKey].backgroundFile, {
             download: true,
@@ -528,14 +536,16 @@ const Statistics = () => {
                             )}
 
                             <div style={fieldStyle}>
-                                <label style={checkboxLabelStyle}>
-                                    <input
-                                        type="checkbox"
-                                        checked={showBackground}
-                                        onChange={(e) => setShowBackground(e.target.checked)}
-                                    />
-                                    Compare with all NEA exoplanets
-                                </label>
+                                {DATASETS[datasetKey].backgroundFile && (
+                                    <label style={checkboxLabelStyle}>
+                                        <input
+                                            type="checkbox"
+                                            checked={showBackground}
+                                            onChange={(e) => setShowBackground(e.target.checked)}
+                                        />
+                                        Compare with all NEA exoplanets
+                                    </label>
+                                )}
                                 {isBackgroundLoading && (
                                     <p style={{ margin: '0 0 8px', fontSize: '0.8rem', color: '#9ca3af' }}>
                                         Loading NEA data...

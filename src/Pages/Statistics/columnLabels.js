@@ -60,6 +60,9 @@ const COLUMN_LABELS = {
     // Shared / not shown in tables
     ra: 'RA',
     dec: 'Dec',
+
+    // Combined Data
+    source: 'Source Dataset',
 };
 
 export const getColumnLabel = (col) => COLUMN_LABELS[col] || col;
