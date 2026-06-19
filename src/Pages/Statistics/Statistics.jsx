@@ -23,8 +23,12 @@ const DATASETS = {
     },
     combined: {
         // Built in-memory from the cumulative + ps datasets; no file to download.
+        // Background is the union of both NEA background files, same as the
+        // candidate set is the union of both candidate files. Order must match
+        // buildCombinedData(cumulative, ps).
         label: 'Combined Data',
         backgroundFile: null,
+        backgroundFiles: ['/AllNEAData/cumulative_background.csv', '/AllNEAData/ps_background.csv'],
         idKey: 'pl_name',
     },
 };
@@ -169,20 +173,27 @@ const Statistics = () => {
     // Lazy-load background NEA data the first time it's requested per dataset
     useEffect(() => {
         if (!showBackground || backgroundData[datasetKey]) return;
-        if (!DATASETS[datasetKey].backgroundFile) return;
+        const ds = DATASETS[datasetKey];
+        if (!ds.backgroundFile && !ds.backgroundFiles) return;
+        const parse = (file) => new Promise((resolve) => {
+            Papa.parse(file, {
+                download: true,
+                header: true,
+                skipEmptyLines: true,
+                complete: (results) => resolve(results.data),
+                error: (error) => {
+                    console.error(`Error parsing ${file}:`, error);
+                    resolve([]);
+                },
+            });
+        });
         setIsBackgroundLoading(true);
-        Papa.parse(DATASETS[datasetKey].backgroundFile, {
-            download: true,
-            header: true,
-            skipEmptyLines: true,
-            complete: (results) => {
-                setBackgroundData((prev) => ({ ...prev, [datasetKey]: results.data }));
-                setIsBackgroundLoading(false);
-            },
-            error: (error) => {
-                console.error(`Error parsing ${DATASETS[datasetKey].backgroundFile}:`, error);
-                setIsBackgroundLoading(false);
-            },
+        const result = ds.backgroundFiles
+            ? Promise.all(ds.backgroundFiles.map(parse)).then(([cumulative, ps]) => buildCombinedData(cumulative, ps))
+            : parse(ds.backgroundFile);
+        result.then((data) => {
+            setBackgroundData((prev) => ({ ...prev, [datasetKey]: data }));
+            setIsBackgroundLoading(false);
         });
     }, [showBackground, datasetKey, backgroundData]);
 
@@ -536,7 +547,7 @@ const Statistics = () => {
                             )}
 
                             <div style={fieldStyle}>
-                                {DATASETS[datasetKey].backgroundFile && (
+                                {(DATASETS[datasetKey].backgroundFile || DATASETS[datasetKey].backgroundFiles) && (
                                     <label style={checkboxLabelStyle}>
                                         <input
                                             type="checkbox"
