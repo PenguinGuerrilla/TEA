@@ -35,7 +35,12 @@ const PLOT_TYPES = [
     { value: 'scatter', label: 'Scatter' },
     { value: 'histogram', label: 'Histogram (X only)' },
     { value: 'box', label: 'Box (Y grouped by X)' },
+    { value: 'line', label: 'Line (count over X)' },
+    { value: 'bar', label: 'Bar (count by category)' },
 ];
+
+const CATEGORICAL_X_TYPES = new Set(['box', 'bar']);
+const COUNT_TYPES = new Set(['line', 'bar', 'histogram']);
 
 const toNumber = (value) => {
     if (value === null || value === undefined) return NaN;
@@ -126,6 +131,7 @@ const Statistics = () => {
     const [plotType, setPlotType] = useState('scatter');
     const [logX, setLogX] = useState(false);
     const [logY, setLogY] = useState(false);
+    const [cumulativeCount, setCumulativeCount] = useState(false);
     const [showBackground, setShowBackground] = useState(false);
     const [backgroundData, setBackgroundData] = useState({ cumulative: null, ps: null });
     const [isBackgroundLoading, setIsBackgroundLoading] = useState(false);
@@ -183,7 +189,7 @@ const Statistics = () => {
         setColorCol((prev) => (categorical.includes(prev) ? prev : ''));
     }, [numeric, categorical]);
 
-    const xOptions = plotType === 'box' ? categorical : numeric;
+    const xOptions = CATEGORICAL_X_TYPES.has(plotType) ? categorical : numeric;
 
     useEffect(() => {
         if (xOptions.length && !xOptions.includes(xCol)) setXCol(xOptions[0]);
@@ -200,6 +206,77 @@ const Statistics = () => {
             bgRows = backgroundData[datasetKey].filter((r) => !candidateIds.has(r[idKey]));
         }
         const hasBg = bgRows.length > 0;
+
+        if (plotType === 'line') {
+            // Count of planets per X value (e.g. discoveries per year)
+            const countByX = (sourceRows) => {
+                const counts = new Map();
+                sourceRows.forEach((r) => {
+                    const x = toNumber(r[xCol]);
+                    if (!Number.isFinite(x)) return;
+                    counts.set(x, (counts.get(x) || 0) + 1);
+                });
+                const xs = [...counts.keys()].sort((a, b) => a - b);
+                let running = 0;
+                const ys = xs.map((x) => {
+                    running += counts.get(x);
+                    return cumulativeCount ? running : counts.get(x);
+                });
+                return { xs, ys, total: running };
+            };
+            const makeLine = (name, { xs, ys }, color) => ({
+                type: 'scatter',
+                mode: 'lines+markers',
+                name,
+                x: xs,
+                y: ys,
+                line: { color, width: 2 },
+                marker: { color, size: 6 },
+                hovertemplate: `${getColumnLabel(xCol)}: %{x}<br>${cumulativeCount ? 'Cumulative count' : 'Count'}: %{y}<extra>${name}</extra>`,
+            });
+            const cand = countByX(rows);
+            const traces = [];
+            let bgTotal = 0;
+            if (hasBg) {
+                const bg = countByX(bgRows);
+                bgTotal = bg.total;
+                traces.push(makeLine('All NEA exoplanets', bg, BACKGROUND_COLOR));
+            }
+            traces.push(makeLine(hasBg ? 'Exomoon candidates' : '', cand, CANDIDATE_COLOR));
+            return { traces, pointCount: cand.total, bgPointCount: bgTotal };
+        }
+
+        if (plotType === 'bar') {
+            // Count of planets per category, sorted by candidate count
+            const countByCat = (sourceRows) => {
+                const counts = new Map();
+                let total = 0;
+                sourceRows.forEach((r) => {
+                    const g = String(r[xCol] ?? '').trim();
+                    if (!g) return;
+                    counts.set(g, (counts.get(g) || 0) + 1);
+                    total++;
+                });
+                return { counts, total };
+            };
+            const cand = countByCat(rows);
+            const bg = hasBg ? countByCat(bgRows) : null;
+            const cats = [...new Set([...cand.counts.keys(), ...(bg ? bg.counts.keys() : [])])]
+                .sort((a, b) => (cand.counts.get(b) || 0) - (cand.counts.get(a) || 0));
+            // Normalize to fractions when comparing: totals differ by orders of magnitude
+            const makeBar = (name, { counts, total }, color) => ({
+                type: 'bar',
+                name,
+                x: cats,
+                y: cats.map((c) => (bg ? (counts.get(c) || 0) / total : (counts.get(c) || 0))),
+                marker: { color },
+                hovertemplate: `%{x}<br>${bg ? 'Fraction' : 'Count'}: %{y}<extra>${name}</extra>`,
+            });
+            const traces = [];
+            if (bg) traces.push(makeBar('All NEA exoplanets', bg, BACKGROUND_COLOR));
+            traces.push(makeBar(bg ? 'Exomoon candidates' : '', cand, CANDIDATE_COLOR));
+            return { traces, pointCount: cand.total, bgPointCount: bg ? bg.total : 0 };
+        }
 
         if (plotType === 'histogram') {
             const xs = rows.map((r) => toNumber(r[xCol])).filter(Number.isFinite);
@@ -328,13 +405,17 @@ const Statistics = () => {
             });
         }
         return { traces: scatterTraces, pointCount: points.length, bgPointCount: bgPoints.length };
-    }, [rows, xCol, yCol, colorCol, plotType, showBackground, backgroundData, datasetKey]);
+    }, [rows, xCol, yCol, colorCol, plotType, showBackground, backgroundData, datasetKey, cumulativeCount]);
 
     const layout = useMemo(() => ({
         title: {
             text: plotType === 'histogram'
                 ? `Distribution of ${getColumnLabel(xCol)}`
-                : `${getColumnLabel(yCol)} vs ${getColumnLabel(xCol)}`,
+                : plotType === 'line'
+                    ? `${cumulativeCount ? 'Cumulative count' : 'Count'} by ${getColumnLabel(xCol)}`
+                    : plotType === 'bar'
+                        ? `Count by ${getColumnLabel(xCol)}`
+                        : `${getColumnLabel(yCol)} vs ${getColumnLabel(xCol)}`,
             font: { color: '#fff', size: 18 },
         },
         paper_bgcolor: '#0b0f19',
@@ -342,7 +423,7 @@ const Statistics = () => {
         font: { color: '#d1d5db' },
         xaxis: {
             title: { text: getColumnLabel(xCol) },
-            type: logX && plotType !== 'box' ? 'log' : undefined,
+            type: logX && !CATEGORICAL_X_TYPES.has(plotType) ? 'log' : undefined,
             gridcolor: '#1f2937',
             zerolinecolor: '#374151',
         },
@@ -350,23 +431,30 @@ const Statistics = () => {
             title: {
                 text: plotType === 'histogram'
                     ? (bgPointCount > 0 ? 'Fraction' : 'Count')
-                    : getColumnLabel(yCol),
+                    : plotType === 'bar'
+                        ? (bgPointCount > 0 ? 'Fraction' : 'Count')
+                        : plotType === 'line'
+                            ? (cumulativeCount ? 'Cumulative count' : 'Count')
+                            : getColumnLabel(yCol),
             },
             type: logY ? 'log' : undefined,
             gridcolor: '#1f2937',
             zerolinecolor: '#374151',
         },
-        barmode: plotType === 'histogram' && bgPointCount > 0 ? 'overlay' : undefined,
+        barmode: bgPointCount > 0 && plotType === 'histogram' ? 'overlay'
+            : bgPointCount > 0 && plotType === 'bar' ? 'group' : undefined,
         boxmode: plotType === 'box' && bgPointCount > 0 ? 'group' : undefined,
         legend: { bgcolor: 'rgba(0,0,0,0)' },
         autosize: true,
         margin: { l: 70, r: 30, t: 60, b: 60 },
-    }), [xCol, yCol, plotType, logX, logY, bgPointCount]);
+    }), [xCol, yCol, plotType, logX, logY, bgPointCount, cumulativeCount]);
 
     const exportImage = (format) => {
         const gd = plotRef.current?.el;
         if (!gd) return;
-        const name = plotType === 'histogram' ? `hist_${xCol}` : `${yCol}_vs_${xCol}`;
+        const name = plotType === 'histogram' ? `hist_${xCol}`
+            : COUNT_TYPES.has(plotType) ? `count_by_${xCol}`
+                : `${yCol}_vs_${xCol}`;
         Plotly.downloadImage(gd, {
             format,
             width: 1400,
@@ -376,7 +464,7 @@ const Statistics = () => {
         });
     };
 
-    const needsY = plotType !== 'histogram';
+    const needsY = !COUNT_TYPES.has(plotType);
 
     return (
         <>
@@ -414,7 +502,7 @@ const Statistics = () => {
                             </div>
 
                             <div style={fieldStyle}>
-                                <label style={labelStyle}>X Axis {plotType === 'box' ? '(category)' : ''}</label>
+                                <label style={labelStyle}>X Axis {CATEGORICAL_X_TYPES.has(plotType) ? '(category)' : ''}</label>
                                 <select style={selectStyle} value={xCol} onChange={(e) => setXCol(e.target.value)}>
                                     {xOptions.map((c) => <option key={c} value={c}>{getColumnLabel(c)}</option>)}
                                 </select>
@@ -453,13 +541,23 @@ const Statistics = () => {
                                         Loading NEA data...
                                     </p>
                                 )}
-                                {plotType !== 'box' && (
+                                {plotType === 'line' && (
+                                    <label style={checkboxLabelStyle}>
+                                        <input
+                                            type="checkbox"
+                                            checked={cumulativeCount}
+                                            onChange={(e) => setCumulativeCount(e.target.checked)}
+                                        />
+                                        Cumulative count
+                                    </label>
+                                )}
+                                {!CATEGORICAL_X_TYPES.has(plotType) && (
                                     <label style={checkboxLabelStyle}>
                                         <input type="checkbox" checked={logX} onChange={(e) => setLogX(e.target.checked)} />
                                         Log scale X
                                     </label>
                                 )}
-                                {needsY && (
+                                {plotType !== 'bar' && (
                                     <label style={checkboxLabelStyle}>
                                         <input type="checkbox" checked={logY} onChange={(e) => setLogY(e.target.checked)} />
                                         Log scale Y
