@@ -3,7 +3,7 @@
 > **Living document.** Every change to the ML model (features, method,
 > hyper-parameters, datasets, outputs, evaluation) MUST be reflected here in the
 > same change. Update the relevant section and append a dated entry to
-> [§11 Changelog](#11-changelog). If code and this doc disagree, the code is the
+> [§12 Changelog](#12-changelog). If code and this doc disagree, the code is the
 > bug until proven otherwise — but they should never diverge in a merged change.
 
 - **Status:** active
@@ -186,7 +186,52 @@ targets (Kepler-11 g, Kepler-89 e, Kepler-411 d).
 
 ---
 
-## 7. Reproducibility
+## 7. Feature importance (permutation)
+
+Code: `ml/feature_importance.py`. The base learner has no native
+`feature_importances_`, and we have no true negatives, so importance is measured
+in a PU-appropriate way.
+
+### 7.1 Metric
+For the full ensemble (`n_bags=50`, `SEED`), importance of feature *f* = the drop
+in **separation** when *f* is shuffled:
+
+```
+separation(s) = mean(s | positive) − mean(s | unlabeled)
+importance(f) = separation_base − mean_over_repeats( separation | f shuffled )   # REPEATS=10
+```
+
+Each physical feature is permuted **together with its `<feat>_missing` flag**, so
+one number maps to one quantity. Reported as raw `importance`, `importance_std`,
+and a normalized `importance_pct` (negative importances clamp to 0 for the share).
+
+### 7.2 Direction of effect
+`direction` = Spearman corr(raw feature value, ensemble score) over all rows
+(monotone-safe for the log-transformed columns). Sign = does a *higher* value
+make a planet more candidate-like.
+
+### 7.3 Current results (top drivers, seed 42)
+
+| Model | Top features (%, direction) | Notes |
+|-------|-----------------------------|-------|
+| kepler | `koi_period` 56.2% ↑, `koi_teq` 12.9% ↓, `koi_model_snr` 11.0% ↑ | `koi_score` **excluded** (leakage, §7.4); orbital period dominates. |
+| ps | `pl_rade` 30% ↑, `sy_pnum` 16.5% ↑, `sy_dist` 9.2% ↑ | multi-planet systems are studied more (selection bias). |
+| combined | `pl_orbper` 29.5% ↑, `pl_rade` 28.3% ↑, `pl_insol` 13.1% ↓, `pl_eqt` 10.6% ↓ | longer period, larger, cooler, lower insolation → more candidate-like. |
+
+Physically consistent with exomoon expectations: **wide orbits** (long period,
+low insolation, cool equilibrium temperature) and **large planets** dominate —
+moons are more dynamically stable and detectable around such hosts.
+
+### 7.4 Excluded feature — `koi_score`
+`koi_score` (Kepler Robovetter disposition) correlates with "is a confirmed
+planet"; since most positives are confirmed, it is **label leakage**, not a
+physical driver. It is listed in `feature_importance.EXCLUDE` and **dropped
+before ranking**, so it does not appear in the importance artifacts. It still
+remains a feature of the Kepler *prediction* model (held fixed during
+permutation, i.e. a constant contributor) — only the importance analysis omits
+it. Removing it from the model entirely is left as future work (§11).
+
+## 8. Reproducibility
 
 - Global `SEED = 42` (numpy RNG + base learner + K-fold). Deterministic given
   fixed inputs.
@@ -196,7 +241,7 @@ targets (Kepler-11 g, Kepler-89 e, Kepler-411 d).
 
 ---
 
-## 8. Outputs / contract with the app
+## 9. Outputs / contract with the app
 
 Per model, written to `public/predictions/`:
 
@@ -212,14 +257,22 @@ cv_folds, recall_at_top_decile, recall_at_top_decile_std,
 median_positive_percentile, lee_liu, positive_median_score,
 unlabeled_median_score, features[]}`.
 
+**`<model>_importance.csv`** (from `feature_importance.py`) — sorted by
+importance desc. Columns: `rank, feature, importance, importance_std,
+importance_pct, direction, non_physical`. Rendered as a Plotly horizontal bar
+chart on `/predictions`: bar **length** = `importance_pct`, **side & color** =
+`direction` (right/indigo = higher-value-more-candidate, left/amber = inverse);
+`non_physical` starred.
+
 The React page (`src/Pages/Predictions/`) loads these as static files (Papa +
-`fetch`); **no inference runs in the browser.** If the CSV column set changes,
+`fetch`); **no inference runs in the browser.** The `/predictions` route is
+lazy-loaded (Plotly is heavy) — see `src/App.jsx`. If the CSV column set changes,
 update `src/Pages/Predictions/columns.jsx` (`FEATURE_COLUMNS`) and any new keys
 in `src/Pages/Statistics/columnLabels.js`.
 
 ---
 
-## 9. Known limitations & biases
+## 10. Known limitations & biases
 
 - **Selection bias is the label.** The target is "looks like what people
   studied," which over-weights Kepler, long-period, large, high-SNR planets.
@@ -237,7 +290,7 @@ in `src/Pages/Statistics/columnLabels.js`.
 
 ---
 
-## 10. Possible future work
+## 11. Possible future work
 
 - Calibrate scores (isotonic / Platt against a PU-aware estimate of class prior).
 - Estimate the class prior `Pr(y=1)` (Elkan–Noto / KM2) for a principled
@@ -247,11 +300,16 @@ in `src/Pages/Statistics/columnLabels.js`.
   moon-stability proxy, transit-duration-vs-period residual).
 - Add XGBoost/LightGBM base option behind a flag and compare via `lee_liu`.
 - Incremental refresh when NEA dumps update.
+- **Drop `koi_score` from the Kepler prediction model** (it is already excluded
+  from importance, §7.4) and re-check whether ranking quality holds without the
+  leakage feature.
 
 ---
 
-## 11. Changelog
+## 12. Changelog
 
 | Date | Change | Sections touched |
 |------|--------|------------------|
 | 2026-06-22 | Initial design: 3 PU-bagging models (kepler/ps/combined) over `HistGradientBoostingClassifier`; PU K-fold eval; static CSV/JSON artifacts consumed by `/predictions`. | all |
+| 2026-06-22 | Added permutation feature importance (`feature_importance.py`): PU-separation-drop metric + Spearman direction, per model; `<model>_importance.csv` artifacts; Plotly bar chart on `/predictions` (route made lazy). Refactored `train_pu.py` to share `fit_bags`/`ensemble_proba` (predictions unchanged). | §7, §9, §11, §12 |
+| 2026-06-22 | Excluded `koi_score` from the importance analysis (`EXCLUDE` set) as label leakage; Kepler ranking now led by `koi_period` (56%), `koi_teq`, `koi_model_snr`. Still a model feature, only omitted from ranking. | §7.3, §7.4, §11 |

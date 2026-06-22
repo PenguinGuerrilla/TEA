@@ -44,8 +44,9 @@ Validation is PU-appropriate (no accuracy/AUC against fake negatives):
 cd ml
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-python build_features.py   # sanity: row/positive counts per model
-python train_pu.py         # prints CV metrics + top picks, writes artifacts
+python build_features.py     # sanity: row/positive counts per model
+python train_pu.py           # prints CV metrics + top picks, writes prediction artifacts
+python feature_importance.py # permutation importance + direction, writes *_importance.csv
 ```
 
 Outputs (committed, consumed by the app):

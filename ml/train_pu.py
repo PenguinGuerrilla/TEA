@@ -42,10 +42,12 @@ def _base():
     )
 
 
-def pu_bag_scores(X, y, n_bags=N_BAGS, seed=SEED):
-    """Average OOB scores over n_bags balanced P-vs-U-subsample fits.
+def fit_bags(X, y, n_bags=N_BAGS, seed=SEED):
+    """Fit the PU-bagging ensemble: each bag = all positives + an equal-size
+    random subsample of the unlabeled rows labelled negative.
 
-    y: 1 = positive, 0 = unlabeled. Returns score array in [0,1] for every row.
+    Returns (clfs, bags) where bags[b] is the unlabeled-row index array used as
+    pseudo-negatives in bag b (needed for out-of-bag scoring).
     """
     rng = np.random.default_rng(seed)
     Xv = X.values
@@ -53,16 +55,44 @@ def pu_bag_scores(X, y, n_bags=N_BAGS, seed=SEED):
     unl_idx = np.where(y == 0)[0]
     n_pos = len(pos_idx)
 
-    score_sum = np.zeros(len(y))
-    score_cnt = np.zeros(len(y))
-
+    clfs, bags = [], []
     for b in range(n_bags):
         samp = rng.choice(unl_idx, size=min(n_pos, len(unl_idx)), replace=False)
         train_idx = np.concatenate([pos_idx, samp])
         y_train = np.concatenate([np.ones(n_pos), np.zeros(len(samp))])
         clf = _base()
         clf.fit(Xv[train_idx], y_train)
+        clfs.append(clf)
+        bags.append(samp)
+    return clfs, bags
 
+
+def ensemble_proba(clfs, X):
+    """Mean positive-class probability over all bags for every row of X.
+
+    In-sample for every row (ignores OOB structure) -- used for permutation
+    importance, where a single consistent score(X) function is what's needed.
+    """
+    Xv = X.values if hasattr(X, "values") else X
+    acc = np.zeros(len(Xv))
+    for clf in clfs:
+        acc += clf.predict_proba(Xv)[:, 1]
+    return acc / len(clfs)
+
+
+def pu_bag_scores(X, y, n_bags=N_BAGS, seed=SEED):
+    """Average OOB scores over n_bags balanced P-vs-U-subsample fits.
+
+    y: 1 = positive, 0 = unlabeled. Returns score array in [0,1] for every row.
+    """
+    Xv = X.values
+    pos_idx = np.where(y == 1)[0]
+    unl_idx = np.where(y == 0)[0]
+    clfs, bags = fit_bags(X, y, n_bags=n_bags, seed=seed)
+
+    score_sum = np.zeros(len(y))
+    score_cnt = np.zeros(len(y))
+    for clf, samp in zip(clfs, bags):
         # OOB = unlabeled rows not used as pseudo-negatives this bag.
         in_bag = np.zeros(len(y), dtype=bool)
         in_bag[samp] = True
