@@ -187,6 +187,15 @@ const Navbar = () => {
           {!isMobile && <span style={linkUnderlineStyle(hoveredLink === 'combined', location.pathname === '/combined')}></span>}
         </div>
         <div
+          onClick={() => handleLinkClick('/predictions')}
+          style={linkStyle(hoveredLink === 'predictions' || location.pathname === '/predictions')}
+          onMouseEnter={() => setHoveredLink('predictions')}
+          onMouseLeave={() => setHoveredLink(null)}
+        >
+          Predictions
+          {!isMobile && <span style={linkUnderlineStyle(hoveredLink === 'predictions', location.pathname === '/predictions')}></span>}
+        </div>
+        <div
           onClick={() => handleLinkClick('/papers')}
           style={linkStyle(hoveredLink === 'papers' || location.pathname === '/papers')}
           onMouseEnter={() => setHoveredLink('papers')}

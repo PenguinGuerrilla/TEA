@@ -63,6 +63,12 @@ const COLUMN_LABELS = {
 
     // Combined Data
     source: 'Source Dataset',
+
+    // Predictions
+    score: 'Predicted Score',
+    is_known_candidate: 'Status',
+    name: 'Name',
+    id: 'ID',
 };
 
 export const getColumnLabel = (col) => COLUMN_LABELS[col] || col;

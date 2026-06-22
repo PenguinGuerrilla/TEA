@@ -1,0 +1,29 @@
+{
+  "cv_folds": 5,
+  "recall_at_top_decile": 0.9419,
+  "recall_at_top_decile_std": 0.0354,
+  "median_positive_percentile": 0.9824,
+  "lee_liu": 9.2203,
+  "model": "kepler",
+  "n_positive": 103,
+  "n_unlabeled": 9461,
+  "n_bags": 100,
+  "seed": 42,
+  "positive_median_score": 0.9716,
+  "unlabeled_median_score": 0.0248,
+  "features": [
+    "koi_period",
+    "koi_prad",
+    "koi_teq",
+    "koi_insol",
+    "koi_model_snr",
+    "koi_depth",
+    "koi_duration",
+    "koi_impact",
+    "koi_steff",
+    "koi_slogg",
+    "koi_srad",
+    "koi_kepmag",
+    "koi_score"
+  ]
+}
