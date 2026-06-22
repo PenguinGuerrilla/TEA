@@ -1,0 +1,23 @@
+{
+  "cv_folds": 5,
+  "recall_at_top_decile": 0.6551,
+  "recall_at_top_decile_std": 0.0771,
+  "median_positive_percentile": 0.9478,
+  "lee_liu": 2.9519,
+  "model": "combined",
+  "n_positive": 154,
+  "n_unlabeled": 15708,
+  "n_bags": 100,
+  "seed": 42,
+  "positive_median_score": 0.8839,
+  "unlabeled_median_score": 0.2062,
+  "features": [
+    "pl_orbper",
+    "pl_rade",
+    "pl_eqt",
+    "pl_insol",
+    "st_teff",
+    "st_rad",
+    "st_logg"
+  ]
+}

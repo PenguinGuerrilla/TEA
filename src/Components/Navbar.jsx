@@ -178,6 +178,24 @@ const Navbar = () => {
           {!isMobile && <span style={linkUnderlineStyle(hoveredLink === 'ps', location.pathname === '/ps')}></span>}
         </div>
         <div
+          onClick={() => handleLinkClick('/combined')}
+          style={linkStyle(hoveredLink === 'combined' || location.pathname === '/combined')}
+          onMouseEnter={() => setHoveredLink('combined')}
+          onMouseLeave={() => setHoveredLink(null)}
+        >
+          Combined Data
+          {!isMobile && <span style={linkUnderlineStyle(hoveredLink === 'combined', location.pathname === '/combined')}></span>}
+        </div>
+        <div
+          onClick={() => handleLinkClick('/predictions')}
+          style={linkStyle(hoveredLink === 'predictions' || location.pathname === '/predictions')}
+          onMouseEnter={() => setHoveredLink('predictions')}
+          onMouseLeave={() => setHoveredLink(null)}
+        >
+          Predictions
+          {!isMobile && <span style={linkUnderlineStyle(hoveredLink === 'predictions', location.pathname === '/predictions')}></span>}
+        </div>
+        <div
           onClick={() => handleLinkClick('/papers')}
           style={linkStyle(hoveredLink === 'papers' || location.pathname === '/papers')}
           onMouseEnter={() => setHoveredLink('papers')}
@@ -185,6 +203,15 @@ const Navbar = () => {
         >
           Papers Explored
           {!isMobile && <span style={linkUnderlineStyle(hoveredLink === 'papers', location.pathname === '/papers')}></span>}
+        </div>
+        <div
+          onClick={() => handleLinkClick('/stats')}
+          style={linkStyle(hoveredLink === 'stats' || location.pathname === '/stats')}
+          onMouseEnter={() => setHoveredLink('stats')}
+          onMouseLeave={() => setHoveredLink(null)}
+        >
+          Statistics
+          {!isMobile && <span style={linkUnderlineStyle(hoveredLink === 'stats', location.pathname === '/stats')}></span>}
         </div>
         <div
           onClick={() => handleLinkClick('/about')}

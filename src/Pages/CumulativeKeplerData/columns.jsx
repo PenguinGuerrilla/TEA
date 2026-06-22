@@ -163,7 +163,7 @@ import { ArrowUpDown } from "lucide-react";
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Orbital Period
+            Orbital Period [days]
             <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
@@ -179,7 +179,7 @@ import { ArrowUpDown } from "lucide-react";
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Equilibrium Temperature
+            Equilibrium Temperature [K]
             <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
@@ -194,7 +194,7 @@ import { ArrowUpDown } from "lucide-react";
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Stellar Radius
+            Stellar Radius [Solar radii]
             <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
@@ -210,7 +210,7 @@ import { ArrowUpDown } from "lucide-react";
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Transit Epoch
+            Transit Epoch [BKJD]
             <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
@@ -242,7 +242,7 @@ import { ArrowUpDown } from "lucide-react";
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Transit Duration
+            Transit Duration [hrs]
             <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
@@ -258,7 +258,7 @@ import { ArrowUpDown } from "lucide-react";
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Transit Depth
+            Transit Depth [ppm]
             <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
@@ -274,7 +274,7 @@ import { ArrowUpDown } from "lucide-react";
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Planetary Radius
+            Planetary Radius [Earth radii]
             <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
@@ -291,7 +291,7 @@ import { ArrowUpDown } from "lucide-react";
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Insolation Flux
+            Insolation Flux [Earth flux]
             <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
@@ -355,7 +355,7 @@ import { ArrowUpDown } from "lucide-react";
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Stellar Effective Temperature
+            Stellar Effective Temperature [K]
             <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
@@ -371,7 +371,7 @@ import { ArrowUpDown } from "lucide-react";
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Stellar Surface Gravity
+            Stellar Surface Gravity [log10(cm/s²)]
             <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
@@ -387,7 +387,7 @@ import { ArrowUpDown } from "lucide-react";
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Kepler-band
+            Kepler-band [mag]
             <ArrowUpDown className={`ml-2 h-4 w-4 ${column.getIsSorted() ? 'text-indigo-500' : ''}`} />
           </div>
         )
